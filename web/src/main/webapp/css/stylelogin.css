@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 html {
-  background: url(../images/TebPWZ6.jpg) no-repeat center center fixed;
+  background: url(../images/img_bg_2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -9,7 +9,7 @@ html {
 }
 .login-page
 {
-   background: url(../images/TebPWZ6.jpg) no-repeat center center fixed;
+   background: url(../images/img_bg_2.jpg) no-repeat center center fixed;
    -webkit-background-size: cover;
    -moz-background-size: cover;
    -o-background-size: cover;
@@ -67,7 +67,7 @@ html {
 }
 .login-block .form-control
 {
-  font-size:17px;
+  font-size:19px;
   border-radius:0px;
 }
 .login-block input:-webkit-autofill
