@@ -24,7 +24,9 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     @Override
     public Contact authorize(String login, String password) {
         if("admin".equals(login) && "admin".equals(password) ) {
-            return new Contact("admin", "admin", "Victor", "Petrakov");
+            final Contact contact =  new Contact("admin", "admin", "Victor", "Petrakov");
+            contact.setId(-1L);
+            return contact;
         }else{
             return null;
         }
