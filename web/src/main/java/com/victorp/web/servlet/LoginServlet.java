@@ -1,6 +1,5 @@
 package com.victorp.web.servlet;
 
-import com.victorp.model.Contact;
 import com.victorp.services.AuthorizationService;
 import com.victorp.services.impl.AuthorizationServiceImpl;
 

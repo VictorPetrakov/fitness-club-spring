@@ -1,6 +1,11 @@
 package com.victorp.services.impl;
 
-import com.victorp.model.Contact;
+import com.victorp.db.dao.impl.HibernateAdminDaoImpl;
+import com.victorp.db.dao.impl.HibernateClientDaoImpl;
+import com.victorp.db.dao.impl.HibernateTrainerDaoImpl;
+import com.victorp.model.Admin;
+import com.victorp.model.Client;
+import com.victorp.model.Trainer;
 import com.victorp.services.AuthorizationService;
 
 public class AuthorizationServiceImpl implements AuthorizationService {
@@ -20,15 +25,26 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     }
     private AuthorizationServiceImpl(){}
 
+    @Override
+    public Client authorizeClient(String login, String password) throws Exception{
+        HibernateClientDaoImpl hibernateClientDao = new HibernateClientDaoImpl();
+        Client client = hibernateClientDao.signUp(login, password);
+
+        return client;
+    }
 
     @Override
-    public Contact authorize(String login, String password) {
-        if("admin".equals(login) && "admin".equals(password) ) {
-            final Contact contact =  new Contact("admin", "admin", "Victor", "Petrakov");
-            contact.setId(-1L);
-            return contact;
-        }else{
-            return null;
-        }
+    public Admin authorizeAdmin(String login, String password) throws Exception {
+        HibernateAdminDaoImpl hibernateAdminDao = new HibernateAdminDaoImpl();
+        Admin admin = hibernateAdminDao.signUp(login, password);
+
+        return admin;
+    }
+
+    @Override
+    public Trainer authorizeTrainer(String login, String password) throws Exception {
+        HibernateTrainerDaoImpl hibernateTrainerDao = new HibernateTrainerDaoImpl();
+        Trainer trainer = hibernateTrainerDao.signUp(login,password);
+        return trainer;
     }
 }
