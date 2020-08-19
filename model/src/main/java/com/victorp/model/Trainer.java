@@ -23,7 +23,7 @@ public class Trainer {
     private String birthdate;
     @Column(name = "email", nullable = false, unique = true)
     private String email;
-    @Column(name = "groups")
+    @Column(name = "groupsName")
     private String group;
     @Column(name = "idRole")
     private static final int idRole = 2;
