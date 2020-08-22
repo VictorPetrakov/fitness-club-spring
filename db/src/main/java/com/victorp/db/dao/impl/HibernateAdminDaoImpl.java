@@ -1,14 +1,25 @@
 package com.victorp.db.dao.impl;
 
+import com.victorp.db.connection.HibernateUtil;
 import com.victorp.db.dao.AdminDao;
 import com.victorp.model.Admin;
+import com.victorp.model.Client;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
 public class HibernateAdminDaoImpl implements AdminDao {
+
+    private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+
     @Override
     public Admin signUp(String login, String password) throws Exception {
-        return null;
+        try (final Session session = sessionFactory.openSession()) {
+            final Query<Admin> query = session.createQuery("SELECT c FROM Admin c WHERE c.login = :login AND c.password = :password"  , Admin.class);
+            return query.getSingleResult();
+        }
     }
 
     @Override

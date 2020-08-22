@@ -35,7 +35,8 @@ public class HibernateUtil {
                 if (sessionFactory == null) {
                     sessionFactory = new Configuration()
                             .configure()
-                            .buildSessionFactory();
+                            .buildSessionFactory()
+                    ;
 
                     try {
                         final Properties properties = new Properties();
@@ -45,8 +46,6 @@ public class HibernateUtil {
                         new Configuration()
                                 .configure("hibernate.cfg.xml")
                                 .addAnnotatedClass(Client.class)
-                                .addAnnotatedClass(Admin.class)
-                                .addAnnotatedClass(Trainer.class)
                                 .addProperties(properties)
                                 .buildSessionFactory();
 
