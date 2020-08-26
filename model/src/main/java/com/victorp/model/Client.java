@@ -29,8 +29,7 @@ public class Client {
     public Client() {
     }
 
-    public Client(Long id, String login, String password, String firstName, String lastName, String birthdate, String email, String groups) {
-        this.id = id;
+    public Client(String login, String password, String firstName, String lastName, String birthdate, String email, String groups) {
         this.login = login;
         this.password = password;
         this.firstName = firstName;
@@ -38,14 +37,6 @@ public class Client {
         this.birthdate = birthdate;
         this.email = email;
         this.groups = groups;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getLogin() {
