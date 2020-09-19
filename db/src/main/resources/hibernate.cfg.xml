@@ -19,9 +19,15 @@
 
         <property name="hibernate.dbcp.initialSize">5</property>
 
+        <mapping class="com.victorp.model.User"/>
+        <mapping class="com.victorp.model.UserRole"/>
         <mapping class="com.victorp.model.Client"/>
         <mapping class="com.victorp.model.Admin"/>
         <mapping class="com.victorp.model.Trainer"/>
+        <mapping class="com.victorp.model.Workout"/>
+        <mapping class="com.victorp.model.WorkoutPersonal"/>
+        <mapping class="com.victorp.model.WorkoutGroup"/>
+
 
 
     </session-factory>

@@ -1,6 +1,6 @@
 package com.victorp.db.dao.impl;
 
-import com.victorp.db.connection.HibernateUtil;
+import com.victorp.db.HibernateUtil;
 import com.victorp.db.dao.ClientDao;
 import com.victorp.model.Client;
 import org.hibernate.Session;

@@ -1,9 +1,8 @@
 package com.victorp.db.dao.impl;
 
-import com.victorp.db.connection.HibernateUtil;
+import com.victorp.db.HibernateUtil;
 import com.victorp.db.dao.AdminDao;
 import com.victorp.model.Admin;
-import com.victorp.model.Client;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;

@@ -1,4 +1,4 @@
-package com.victorp.db.connection;
+package com.victorp.db;
 
 import java.io.IOException;
 import java.io.InputStream;

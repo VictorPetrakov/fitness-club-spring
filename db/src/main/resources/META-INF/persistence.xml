@@ -7,9 +7,15 @@
     <persistence-unit name="com.victorp.db" transaction-type="RESOURCE_LOCAL">
         <description>JPA Sample</description>
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>com.victorp.model.User</class>
+        <class>com.victorp.model.UserRole</class>
         <class>com.victorp.model.Admin</class>
         <class>com.victorp.model.Trainer</class>
         <class>com.victorp.model.Client</class>
+        <class>com.victorp.model.Workout</class>
+        <class>com.victorp.model.WorkoutPersonal</class>
+        <class>com.victorp.model.WorkoutGroup</class>
+
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
         <properties>

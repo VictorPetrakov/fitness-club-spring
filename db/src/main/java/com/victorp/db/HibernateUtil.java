@@ -1,8 +1,7 @@
-package com.victorp.db.connection;
+package com.victorp.db;
 
-import com.victorp.model.Admin;
 import com.victorp.model.Client;
-import com.victorp.model.Trainer;
+import com.victorp.model.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -45,7 +44,7 @@ public class HibernateUtil {
 
                         new Configuration()
                                 .configure("hibernate.cfg.xml")
-                                .addAnnotatedClass(Client.class)
+                                .addAnnotatedClass(User.class)
                                 .addProperties(properties)
                                 .buildSessionFactory();
 
