@@ -3,11 +3,14 @@ package com.victorp.db.dao.impl;
 import com.victorp.db.HibernateUtil;
 import com.victorp.db.dao.ClientDao;
 import com.victorp.model.Client;
+import com.victorp.model.User;
+import com.victorp.model.UserRole;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
+import javax.persistence.NoResultException;
 import java.util.List;
 
 public class HibernateClientDaoImpl implements ClientDao {
@@ -17,7 +20,7 @@ public class HibernateClientDaoImpl implements ClientDao {
     @Override
     public Client getByLogin(String login) throws Exception {
         try (final Session session = sessionFactory.openSession()){
-            final Query<Client> query = session.createQuery("SELECT c FROM Client c WHERE c.login = :login", Client.class);
+            final Query<Client> query = session.createQuery("SELECT c FROM User c WHERE c.login = :login", Client.class);
             query.setParameter("login", login);
             return query.getSingleResult();
         }
@@ -27,7 +30,7 @@ public class HibernateClientDaoImpl implements ClientDao {
     @Override
     public Client signUp(String login, String password) throws Exception {
         try (final Session session = sessionFactory.openSession()) {
-            final Query<Client> query = session.createQuery("SELECT c FROM Client c WHERE c.login = :login AND c.password = :password"  , Client.class);
+            final Query<Client> query = session.createQuery("SELECT c FROM User c WHERE c.login = :login AND c.password = :password"  , Client.class);
             return query.getSingleResult();
         }
     }
@@ -56,7 +59,6 @@ public class HibernateClientDaoImpl implements ClientDao {
             session.save(client);
             session.getTransaction().commit();
         }
-
     }
 
     @Override
@@ -76,6 +78,23 @@ public class HibernateClientDaoImpl implements ClientDao {
             final Client client = session.get(Client.class, id);
             session.delete(client);
             session.getTransaction().commit();
+        }
+
+    }
+    @Override
+    public boolean checkClient(String login) {
+        Client client = null;
+        try (final Session session = sessionFactory.openSession()) {
+            final Query<Client> query = session.createQuery("SELECT c FROM Client c WHERE c.login = :login", Client.class).setParameter("login",login);
+            client = query.getSingleResult();
+
+        }catch (NoResultException nre){
+
+        }
+        if(client != null){
+            return true;
+        }else{
+            return false;
         }
 
     }

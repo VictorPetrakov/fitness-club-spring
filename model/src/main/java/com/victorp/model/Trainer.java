@@ -17,8 +17,9 @@ public class Trainer {
     @GeneratedValue(generator = "one-one")
     @Column(name = "user_id")
     private Long id;
+    
     @Column
-    private String name;
+    private String login;
 
     @Column
     private Long trainerIdentifier;
@@ -30,22 +31,19 @@ public class Trainer {
     @OneToOne(mappedBy = "trainer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Workout workout;
 
-
-    private static final int idRole = 2;
-
     public Trainer() {
     }
-    public Trainer(String name){
-        this.name = name;
+    public Trainer(String login){
+
+        this.login = login;
     }
 
-
-    public String getName() {
-        return name;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getLogin() {
+        return login;
     }
 
     public Long getTrainerIdentifier() {

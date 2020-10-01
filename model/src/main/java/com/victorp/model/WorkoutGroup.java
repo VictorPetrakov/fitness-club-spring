@@ -14,8 +14,9 @@ public class WorkoutGroup {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    private Trainer trainer;
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    private Workout workout;
 
     @OneToMany(mappedBy = "workoutGroup")
     private List<Client> clientList;
@@ -25,19 +26,10 @@ public class WorkoutGroup {
     public WorkoutGroup() {
     }
 
-    public WorkoutGroup(Trainer trainer, List<Client> clientList, String trainingTime) {
-        this.trainer = trainer;
+    public WorkoutGroup(List<Client> clientList, String trainingTime) {
+
         this.clientList = clientList;
         this.trainingTime = trainingTime;
-    }
-
-    public Trainer getTrainer() {
-
-        return trainer;
-    }
-
-    public void setTrainer(Trainer trainer) {
-        this.trainer = trainer;
     }
 
     public List<Client> getClientList() {

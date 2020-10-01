@@ -36,10 +36,7 @@ public class User {
     @Column(name = "groupFitness")
     private String group;
 
-    @Column(name = "idRole")
-    private int idRole;
-
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_role_id")
     private UserRole userRole;
 
@@ -97,16 +94,6 @@ public class User {
         this.email = email;
         this.group = group;
     }
-
-    public int getIdRole() {
-        return idRole;
-    }
-
-    public void setIdRole(int idRole) {
-        this.idRole = idRole;
-    }
-
-
 
     public Long getId() {
         return id;

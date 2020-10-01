@@ -12,8 +12,6 @@ import javax.persistence.*;
 @Table(name = "admin")
 public class Admin{
 
-    private static final int idRole = 1;
-
     @Id
     @GenericGenerator(name = "one-one", strategy = "foreign",
             parameters = @Parameter(name = "property", value = "user"))
@@ -22,28 +20,28 @@ public class Admin{
     private Long id;
 
     @Column
-    private String name;
+    private String login;
 
     @Column
     private Long adminIdentifier;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @MapsId
     private User user;
 
     public Admin() {
     }
-    public Admin(String name){
-        this.name = name;
+    public Admin(String login){
+        this.login = login;
     }
 
 
-    public String getName() {
-        return name;
+    public String getLogin() {
+        return login;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public Long getAdminIdentifier() {

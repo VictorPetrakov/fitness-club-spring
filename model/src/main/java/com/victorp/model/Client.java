@@ -12,8 +12,6 @@ import javax.persistence.*;
 @Table(name = "client")
 public class Client{
 
-    private static final int idRole = 3;
-
     @Id
     @GenericGenerator(name = "one-one", strategy = "foreign",
             parameters = @Parameter(name = "property", value = "user"))
@@ -22,7 +20,7 @@ public class Client{
     private Long id;
 
     @Column
-    private String name;
+    private String login;
 
     @Column
     private Long clientIdentifier;
@@ -30,6 +28,7 @@ public class Client{
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
     private User user;
+
     @ManyToOne
     private WorkoutGroup workoutGroup;
     @OneToOne(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -38,16 +37,16 @@ public class Client{
     public Client() {
     }
 
-    public Client(String name){
-        this.name = name;
+    public Client(String login){
+        this.login = login;
     }
 
-    public String getName() {
-        return name;
+    public String getLogin() {
+        return login;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public Long getClientIdentifier() {

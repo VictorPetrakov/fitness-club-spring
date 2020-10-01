@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final String login = req.getParameter(LOGIN_PARAM);
         final String password = req.getParameter(PASSWORD_PARAM);
-        final int role = Integer.valueOf(req.getParameter(ID_ROLE));
+        final int role = Integer.parseInt(req.getParameter(ID_ROLE));
 
         final Client client;
         final Trainer trainer;
@@ -38,15 +38,14 @@ public class LoginServlet extends HttpServlet {
                 try {
                     admin = authorizationService.authorizeAdmin(login, password);
                     final String contextPath = req.getContextPath();
-
                     if (admin == null) {
                         resp.sendRedirect(contextPath + "/login.html");
                     } else {
                         final HttpSession session = req.getSession();
-                        session.setAttribute(USER_ID_PARAM, admin.getId());
-                        //session.setAttribute(STATUS, admin.getIdRole());
-                        req.setAttribute("username", admin.getFirstName() + " " + admin.getLastName());
-                        getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
+//                        session.setAttribute(USER_ID_PARAM, admin.getId());
+//                        session.setAttribute(STATUS, admin.getIdRole());
+//                        req.setAttribute("username", admin.getFirstName() + " " + admin.getLastName());
+                        getServletContext().getRequestDispatcher("index.jsp").forward(req, resp);
                         final Cookie myOwnCookie = new Cookie("MyOwnCookie", "PC");
                         resp.addCookie(myOwnCookie);
                     }
@@ -64,9 +63,9 @@ public class LoginServlet extends HttpServlet {
                         resp.sendRedirect(contextPath + "/login.html");
                     } else {
                         final HttpSession session = req.getSession();
-                        session.setAttribute(USER_ID_PARAM, trainer.getId());
-                        req.setAttribute("username", trainer.getFirstName() + " " + trainer.getLastName());
-                        req.setAttribute("status", trainer.getIdRole() );
+//                        session.setAttribute(USER_ID_PARAM, trainer.getId());
+//                        req.setAttribute("username", trainer.getFirstName() + " " + trainer.getLastName());
+//                        req.setAttribute("status", trainer.getIdRole() );
                         final Cookie myOwnCookie = new Cookie("MyOwnCookie", "PC");
                         resp.addCookie(myOwnCookie);
                     }
@@ -84,9 +83,9 @@ public class LoginServlet extends HttpServlet {
                         resp.sendRedirect(contextPath + "/login.html");
                     } else {
                         final HttpSession session = req.getSession();
-                        session.setAttribute(USER_ID_PARAM, client.getId());
-                        req.setAttribute("username", client.getFirstName() + " " + client.getLastName());
-                        req.setAttribute("status", client.getIdRole() );
+//                        session.setAttribute(USER_ID_PARAM, client.getId());
+//                        req.setAttribute("username", client.getFirstName() + " " + client.getLastName());
+//                        req.setAttribute("status", client.getIdRole() );
                         final Cookie myOwnCookie = new Cookie("MyOwnCookie", "PC");
                         resp.addCookie(myOwnCookie);
 
@@ -97,6 +96,7 @@ public class LoginServlet extends HttpServlet {
                 }
                 break;
         }
+
         resp.setContentType("text/html;charset=UTF-8");
         final RequestDispatcher dispatcher = req.getRequestDispatcher("index.jsp");
         dispatcher.include(req, resp);

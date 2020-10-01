@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
 
@@ -53,7 +53,7 @@
     <div class="login-block">
         <img src="images/1.png" alt="your foto"><br>
 
-        <form action="regist" method="post">
+        <form action="registTrainers" method="post">
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
@@ -70,6 +70,19 @@
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
                     <input name="lastname" type="text" class="form-control" placeholder="Ваша фамилия">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
+                    <select name="group" class="form-control" >
+                        <option value="none" hidden="">Название группы</option>
+                        <option value="1">Бодибилдинг</option>
+                        <option value="2">Кроссфит</option>
+                        <option value="3">Йога</option>
+                        <option value="4">Групповые занятия</option>
+                        <option value="5">Аэробика</option>
+                    </select>
                 </div>
             </div>
             <div class="form-group">

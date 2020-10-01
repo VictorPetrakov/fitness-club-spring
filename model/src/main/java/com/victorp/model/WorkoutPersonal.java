@@ -9,8 +9,10 @@ public class WorkoutPersonal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    private Trainer trainer;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "workout_id")
+    private Workout workout;
+
     @OneToOne
     private Client client;
     @Column
@@ -19,18 +21,9 @@ public class WorkoutPersonal {
     public WorkoutPersonal() {
     }
 
-    public WorkoutPersonal(Trainer trainer, Client client, String trainingTime) {
-        this.trainer = trainer;
+    public WorkoutPersonal(Client client, String trainingTime) {
         this.client = client;
         this.trainingTime = trainingTime;
-    }
-
-    public Trainer getTrainer() {
-        return trainer;
-    }
-
-    public void setTrainer(Trainer trainer) {
-        this.trainer = trainer;
     }
 
     public Client getClient() {

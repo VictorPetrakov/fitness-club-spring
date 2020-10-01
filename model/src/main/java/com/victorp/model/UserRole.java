@@ -9,8 +9,8 @@ import java.util.List;
 
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Entity
-@Table(name = "user_role")
 
+@Table(name = "user_role")
 public class UserRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,26 +22,32 @@ public class UserRole {
     @Column
     private Boolean admin;
 
-    @OneToMany(mappedBy = "userRole")
+    @Column
+    private Boolean trainer;
+
+    @OneToMany(mappedBy = "userRole",fetch = FetchType.EAGER)
     private List<User> users = new ArrayList<>();
 
     public UserRole() {
     }
 
-    public UserRole(String name, Boolean admin) {
+    public UserRole(String name, Boolean admin, Boolean trainer) {
         this.name = name;
         this.admin = admin;
+        this.trainer = trainer;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Long id)
+    {
         this.id = id;
     }
 
     public String getName() {
+
         return name;
     }
 
@@ -50,6 +56,7 @@ public class UserRole {
     }
 
     public Boolean getAdmin() {
+
         return admin;
     }
 
@@ -57,15 +64,28 @@ public class UserRole {
         this.admin = admin;
     }
 
-    public List<User> getContacts() {
+    public void setTrainer(Boolean trainer) {
+
+        this.trainer = trainer;
+    }
+
+    public Boolean getTrainer() {
+
+        return trainer;
+    }
+
+    public List<User> getUsers() {
+
         return users;
     }
 
-    public void setContacts(List<User> users) {
+    public void setUsers(List<User> users) {
+
         this.users = users;
     }
 
-    public void addContact(User user) {
+    public void addUser(User user) {
+
         this.users.add(user);
     }
 

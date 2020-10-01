@@ -1,6 +1,7 @@
 package com.victorp.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Workout {
@@ -15,4 +16,57 @@ public class Workout {
     @MapsId
     private Trainer trainer;
 
+    @OneToMany(mappedBy = "workout")
+    private List<WorkoutPersonal> workoutPersonalList;
+
+    @OneToOne(mappedBy = "workout", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private WorkoutGroup workoutGroup;
+
+    public Workout() {
+    }
+
+    public Workout(String nameWorkout, Trainer trainer) {
+        this.nameWorkout = nameWorkout;
+        this.trainer = trainer;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNameWorkout() {
+        return nameWorkout;
+    }
+
+    public void setNameWorkout(String nameWorkout) {
+        this.nameWorkout = nameWorkout;
+    }
+
+    public Trainer getTrainer() {
+        return trainer;
+    }
+
+    public void setTrainer(Trainer trainer) {
+        this.trainer = trainer;
+    }
+
+    public List<WorkoutPersonal> getWorkoutPersonalList() {
+        return workoutPersonalList;
+    }
+
+    public void setWorkoutPersonalList(List<WorkoutPersonal> workoutPersonalList) {
+        this.workoutPersonalList = workoutPersonalList;
+    }
+
+    public WorkoutGroup getWorkoutGroup() {
+        return workoutGroup;
+    }
+
+    public void setWorkoutGroup(WorkoutGroup workoutGroup) {
+        this.workoutGroup = workoutGroup;
+    }
 }
