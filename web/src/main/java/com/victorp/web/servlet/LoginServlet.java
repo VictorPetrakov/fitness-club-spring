@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
                     final Cookie myOwnCookie = new Cookie("MyOwnCookie", "PC");
                     resp.addCookie(myOwnCookie);
             }else{
-                resp.sendRedirect(contextPath + "/login.html");
+                resp.sendRedirect(contextPath + "/login.jsp");
             }
         } catch (Exception e) {
             e.printStackTrace();

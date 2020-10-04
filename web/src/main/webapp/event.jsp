@@ -71,19 +71,33 @@
 								<li class="has-dropdown">
 									<a href="classes.html">Группы</a>
 									<ul class="dropdown">
-										<li><a href="classes-single.html">Classes Single</a></li>
-										<li><a href="#">Cardio Classes</a></li>
-										<li><a href="#">Muscle Classes</a></li>
-										<li><a href="#">Fitness Classes</a></li>
-										<li><a href="#">Body Building</a></li>
+										<li><a href="classes-single.html">Индивидуальные занаятия</a></li>
+										<li><a href="#">Кроссфит группа</a></li>
+										<li><a href="#">Группа бокса</a></li>
+										<li><a href="#">Фитнес группа</a></li>
+										<li><a href="#">Бодибилдинг</a></li>
+										<li><a href="#">Силовой экстрим</a></li>
+										<li><a href="#">Йога</a></li>
+										<li><a href="#">Степ-аэробика</a></li>
 									</ul>
 								</li>
-								<li><a href="schedule.html">Расписание</a></li>
+								<li><a href="schedule.jsp">Расписание</a></li>
 								<li><a href="about.html">Тренеры</a></li>
 								<li><a href="event.html">События</a></li>
 								<li><a href="blog.html">Блог</a></li>
 								<li><a href="contact.html">Контакты</a></li>
-								<li><a href="login.html">Войти</a></li>
+								<c:if test="${sessionScope.statusAdmin == true || sessionScope.statusTrainer == true}">
+									<li><a href="trainerPage.jsp">Тренерская</a></li>
+								</c:if>
+								<c:if test="${sessionScope.statusAdmin == true}">
+									<li><a href=administration.jsp>Администрирование</a></li>
+								</c:if>
+								<c:if test="${sessionScope.userId == null}">
+									<li><a href="login.jsp">Войти</a></li>
+								</c:if>
+								<c:if test="${sessionScope.userId != null}">
+									<li><a href="logout">Выйти</a></li>
+								</c:if>
 							</ul>
 						</div>
 					</div>
@@ -99,8 +113,8 @@
 			   			<div class="row">
 				   			<div class="col-md-6 col-sm-12 col-md-offset-3 slider-text">
 				   				<div class="slider-text-inner text-center">
-				   					<h1>About</h1>
-				   					<h2><span><a href="index.jsp">Home</a> | About</span></h2>
+				   					<h1>Blog</h1>
+				   					<h2><span><a href="index.jsp">Home</a> | Blog</span></h2>
 				   				</div>
 				   			</div>
 				   		</div>
@@ -110,73 +124,92 @@
 		  	</div>
 		</aside>
 		
-		<div id="colorlib-about">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-8 col-md-offset-2 row-pb-md animate-box">
-						<div class="video colorlib-video" style="background-image: url(images/img_bg_1.jpg);">
-							<a href="https://vimeo.com/channels/staffpicks/93951774" class="popup-vimeo"><i class="icon-play3"></i></a>
-							<div class="overlay"></div>
-						</div>
-					</div>
-					<div class="col-md-10 col-md-offset-1 text-center animate-box">
-						<div class="about-wrap">
-							<div class="heading-2">
-								<h2>Robust Gym the leading fitness site</h2>
-							</div>
-							<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-							<p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="colorlib-trainers">
+		<div class="colorlib-event">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2 text-center colorlib-heading animate-box">
-						<h2>Our Experienced Trainers</h2>
+						<h2>Upcoming Events</h2>
 						<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name</p>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-md-3 col-sm-3 animate-box">
-						<div class="trainers-entry">
-							<div class="trainer-img" style="background-image: url(images/trainer-1.jpg)"></div>
+				<div class="row row-pb-sm">
+					<div class="col-md-4 animate-box">
+						<div class="event-entry">
 							<div class="desc">
-								<h3>Diego Carter</h3>
-								<span>Body Building Trainer</span>
+								<p class="meta"><span class="day">19</span><span class="month">Apr</span></p>
+								<p class="organizer"><span>Organized by:</span> <span>Noah Henderson</span></p>
+								<h2><a href="event.jsp">Special Training for Karate at Robust Gym</a></h2>
+							</div>
+							<div class="location">
+								<span class="icon"><i class="icon-map"></i></span>
+								<p>291 South 21th Street, Suite 721 New York NY 10016</p>
 							</div>
 						</div>
 					</div>
-
-					<div class="col-md-3 col-sm-3 animate-box">
-						<div class="trainers-entry">
-							<div class="trainer-img" style="background-image: url(images/trainer-2.jpg)"></div>
+					<div class="col-md-4 animate-box">
+						<div class="event-entry">
 							<div class="desc">
-								<h3>Lea Young</h3>
-								<span>Body Building Trainer</span>
+								<p class="meta"><span class="day">19</span><span class="month">Apr</span></p>
+								<p class="organizer"><span>Organized by:</span> <span>Noah Henderson</span></p>
+								<h2><a href="event.jsp">World Yoga Day at Robust Gym</a></h2>
+							</div>
+							<div class="location">
+								<span class="icon"><i class="icon-map"></i></span>
+								<p>291 South 21th Street, Suite 721 New York NY 10016</p>
 							</div>
 						</div>
 					</div>
-
-					<div class="col-md-3 col-sm-3 animate-box">
-						<div class="trainers-entry">
-							<div class="trainer-img" style="background-image: url(images/trainer-3.jpg)"></div>
+					<div class="col-md-4 animate-box">
+						<div class="event-entry">
 							<div class="desc">
-								<h3>Alysha Reed</h3>
-								<span>Body Building Trainer</span>
+								<p class="meta"><span class="day">19</span><span class="month">Apr</span></p>
+								<p class="organizer"><span>Organized by:</span> <span>Noah Henderson</span></p>
+								<h2><a href="event.jsp">1st Anniversary of Robust Gym</a></h2>
+							</div>
+							<div class="location">
+								<span class="icon"><i class="icon-map"></i></span>
+								<p>291 South 21th Street, Suite 721 New York NY 10016</p>
 							</div>
 						</div>
 					</div>
-
-					<div class="col-md-3 col-sm-3 animate-box">
-						<div class="trainers-entry">
-							<div class="trainer-img" style="background-image: url(images/trainer-4.jpg)"></div>
+				</div>
+				<div class="row row-pb-sm">
+					<div class="col-md-4 animate-box">
+						<div class="event-entry">
 							<div class="desc">
-								<h3>George Cooper</h3>
-								<span>Body Building Trainer</span>
+								<p class="meta"><span class="day">19</span><span class="month">Apr</span></p>
+								<p class="organizer"><span>Organized by:</span> <span>Noah Henderson</span></p>
+								<h2><a href="event.jsp">Karate at Robust Gym</a></h2>
+							</div>
+							<div class="location">
+								<span class="icon"><i class="icon-map"></i></span>
+								<p>291 South 21th Street, Suite 721 New York NY 10016</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 animate-box">
+						<div class="event-entry">
+							<div class="desc">
+								<p class="meta"><span class="day">19</span><span class="month">Apr</span></p>
+								<p class="organizer"><span>Organized by:</span> <span>Noah Henderson</span></p>
+								<h2><a href="event.jsp">World Yoga Day at Robust Gymnasium</a></h2>
+							</div>
+							<div class="location">
+								<span class="icon"><i class="icon-map"></i></span>
+								<p>291 South 21th Street, Suite 721 New York NY 10016</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 animate-box">
+						<div class="event-entry">
+							<div class="desc">
+								<p class="meta"><span class="day">19</span><span class="month">Apr</span></p>
+								<p class="organizer"><span>Organized by:</span> <span>Noah Henderson</span></p>
+								<h2><a href="event.jsp">1st Anniversary of Robust Gym</a></h2>
+							</div>
+							<div class="location">
+								<span class="icon"><i class="icon-map"></i></span>
+								<p>291 South 21th Street, Suite 721 New York NY 10016</p>
 							</div>
 						</div>
 					</div>
@@ -247,26 +280,26 @@
 					<div class="col-md-3 colorlib-widget">
 						<h4>Recent Post</h4>
 						<div class="f-blog">
-							<a href="blog.html" class="blog-img" style="background-image: url(images/blog-1.jpg);">
+							<a href="blog.jsp" class="blog-img" style="background-image: url(images/blog-1.jpg);">
 							</a>
 							<div class="desc">
-								<h2><a href="blog.html">Tips for sexy body</a></h2>
+								<h2><a href="blog.jsp">Tips for sexy body</a></h2>
 								<p class="admin"><span>18 April 2018</span></p>
 							</div>
 						</div>
 						<div class="f-blog">
-							<a href="blog.html" class="blog-img" style="background-image: url(images/blog-2.jpg);">
+							<a href="blog.jsp" class="blog-img" style="background-image: url(images/blog-2.jpg);">
 							</a>
 							<div class="desc">
-								<h2><a href="blog.html">Tips for sexy body</a></h2>
+								<h2><a href="blog.jsp">Tips for sexy body</a></h2>
 								<p class="admin"><span>18 April 2018</span></p>
 							</div>
 						</div>
 						<div class="f-blog">
-							<a href="blog.html" class="blog-img" style="background-image: url(images/blog-3.jpg);">
+							<a href="blog.jsp" class="blog-img" style="background-image: url(images/blog-3.jpg);">
 							</a>
 							<div class="desc">
-								<h2><a href="blog.html">Tips for sexy body</a></h2>
+								<h2><a href="blog.jsp">Tips for sexy body</a></h2>
 								<p class="admin"><span>18 April 2018</span></p>
 							</div>
 						</div>

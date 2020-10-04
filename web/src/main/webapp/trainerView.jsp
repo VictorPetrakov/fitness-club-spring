@@ -72,15 +72,18 @@
                     </div>
                     <div class="col-md-10 text-right menu-1">
                         <ul>
-                            <li><a href="index.jsp">Главная</a></li>
-                            <li class="has-dropdown active">
+                            <li class="active"><a href="index.jsp">Главная</a></li>
+                            <li class="has-dropdown">
                                 <a href="classes.html">Группы</a>
                                 <ul class="dropdown">
-                                    <li><a href="classes-single.html">Classes Single</a></li>
-                                    <li><a href="#">Cardio Classes</a></li>
-                                    <li><a href="#">Muscle Classes</a></li>
-                                    <li><a href="#">Fitness Classes</a></li>
-                                    <li><a href="#">Body Building</a></li>
+                                    <li><a href="classes-single.html">Индивидуальные занаятия</a></li>
+                                    <li><a href="#">Кроссфит группа</a></li>
+                                    <li><a href="#">Группа бокса</a></li>
+                                    <li><a href="#">Фитнес группа</a></li>
+                                    <li><a href="#">Бодибилдинг</a></li>
+                                    <li><a href="#">Силовой экстрим</a></li>
+                                    <li><a href="#">Йога</a></li>
+                                    <li><a href="#">Степ-аэробика</a></li>
                                 </ul>
                             </li>
                             <li><a href="schedule.html">Расписание</a></li>
@@ -88,12 +91,17 @@
                             <li><a href="event.html">События</a></li>
                             <li><a href="blog.html">Блог</a></li>
                             <li><a href="contact.html">Контакты</a></li>
-                            <li><a href=administration.jsp>Администрирование</a></li>
+                            <c:if test="${sessionScope.statusAdmin == true || sessionScope.statusTrainer == true}">
+                                <li><a href="trainerPage.jsp">Тренерская</a></li>
+                            </c:if>
+                            <c:if test="${sessionScope.statusAdmin == true}">
+                                <li><a href=administration.jsp>Администрирование</a></li>
+                            </c:if>
                             <c:if test="${sessionScope.userId == null}">
                                 <li><a href="login.html">Войти</a></li>
                             </c:if>
                             <c:if test="${sessionScope.userId != null}">
-                                <li><a href="index.jsp">Выйти</a></li>
+                                <li><a href="logout">Выйти</a></li>
                             </c:if>
                         </ul>
                     </div>
@@ -225,26 +233,26 @@
                 <div class="col-md-3 colorlib-widget">
                     <h4>Recent Post</h4>
                     <div class="f-blog">
-                        <a href="blog.html" class="blog-img" style="background-image: url(images/blog-1.jpg);">
+                        <a href="blog.jsp" class="blog-img" style="background-image: url(images/blog-1.jpg);">
                         </a>
                         <div class="desc">
-                            <h2><a href="blog.html">Tips for sexy body</a></h2>
+                            <h2><a href="blog.jsp">Tips for sexy body</a></h2>
                             <p class="admin"><span>18 April 2018</span></p>
                         </div>
                     </div>
                     <div class="f-blog">
-                        <a href="blog.html" class="blog-img" style="background-image: url(images/blog-2.jpg);">
+                        <a href="blog.jsp" class="blog-img" style="background-image: url(images/blog-2.jpg);">
                         </a>
                         <div class="desc">
-                            <h2><a href="blog.html">Tips for sexy body</a></h2>
+                            <h2><a href="blog.jsp">Tips for sexy body</a></h2>
                             <p class="admin"><span>18 April 2018</span></p>
                         </div>
                     </div>
                     <div class="f-blog">
-                        <a href="blog.html" class="blog-img" style="background-image: url(images/blog-3.jpg);">
+                        <a href="blog.jsp" class="blog-img" style="background-image: url(images/blog-3.jpg);">
                         </a>
                         <div class="desc">
-                            <h2><a href="blog.html">Tips for sexy body</a></h2>
+                            <h2><a href="blog.jsp">Tips for sexy body</a></h2>
                             <p class="admin"><span>18 April 2018</span></p>
                         </div>
                     </div>

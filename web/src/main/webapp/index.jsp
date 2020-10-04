@@ -75,9 +75,9 @@
 						<ul>
 							<li class="active"><a href="index.jsp">Главная</a></li>
 							<li class="has-dropdown">
-								<a href="classes.html">Группы</a>
+								<a href="classes.jsp">Группы</a>
 								<ul class="dropdown">
-									<li><a href="classes-single.html">Индивидуальные занаятия</a></li>
+									<li><a href="classes-single.jsp">Индивидуальные занаятия</a></li>
 									<li><a href="#">Кроссфит группа</a></li>
 									<li><a href="#">Группа бокса</a></li>
 									<li><a href="#">Фитнес группа</a></li>
@@ -87,11 +87,11 @@
 									<li><a href="#">Степ-аэробика</a></li>
 								</ul>
 							</li>
-							<li><a href="schedule.html">Расписание</a></li>
-							<li><a href="about.html">Тренеры</a></li>
-							<li><a href="event.html">События</a></li>
-							<li><a href="blog.html">Блог</a></li>
-							<li><a href="contact.html">Контакты</a></li>
+							<li><a href="schedule.jsp">Расписание</a></li>
+							<li><a href="about.jsp">Тренеры</a></li>
+							<li><a href="event.jsp">События</a></li>
+							<li><a href="blog.jsp">Блог</a></li>
+							<li><a href="contact.jsp">Контакты</a></li>
 							<c:if test="${sessionScope.statusAdmin == true || sessionScope.statusTrainer == true}">
 								<li><a href="trainerPage.jsp">Тренерская</a></li>
 							</c:if>
@@ -99,7 +99,7 @@
 								<li><a href=administration.jsp>Администрирование</a></li>
 							</c:if>
 							<c:if test="${sessionScope.userId == null}">
-								<li><a href="login.html">Войти</a></li>
+								<li><a href="login.jsp">Войти</a></li>
 							</c:if>
 							<c:if test="${sessionScope.userId != null}">
 								<li><a href="logout">Выйти</a></li>
@@ -505,7 +505,7 @@
 						<div class="desc">
 							<p class="meta"><span class="day">19</span><span class="month">Apr</span></p>
 							<p class="organizer"><span>Organized by:</span> <span>Noah Henderson</span></p>
-							<h2><a href="event.html">Special Training for Karate at Robust Gym</a></h2>
+							<h2><a href="event.jsp">Special Training for Karate at Robust Gym</a></h2>
 						</div>
 						<div class="location">
 							<span class="icon"><i class="icon-map"></i></span>
@@ -518,7 +518,7 @@
 						<div class="desc">
 							<p class="meta"><span class="day">19</span><span class="month">Apr</span></p>
 							<p class="organizer"><span>Organized by:</span> <span>Noah Henderson</span></p>
-							<h2><a href="event.html">World Yoga Day at Robust Gym</a></h2>
+							<h2><a href="event.jsp">World Yoga Day at Robust Gym</a></h2>
 						</div>
 						<div class="location">
 							<span class="icon"><i class="icon-map"></i></span>
@@ -531,7 +531,7 @@
 						<div class="desc">
 							<p class="meta"><span class="day">19</span><span class="month">Apr</span></p>
 							<p class="organizer"><span>Organized by:</span> <span>Noah Henderson</span></p>
-							<h2><a href="event.html">1st Anniversary of Robust Gym</a></h2>
+							<h2><a href="event.jsp">1st Anniversary of Robust Gym</a></h2>
 						</div>
 						<div class="location">
 							<span class="icon"><i class="icon-map"></i></span>
@@ -553,36 +553,36 @@
 			<div class="row">
 				<div class="col-md-4 animate-box">
 					<article class="article-entry">
-						<a href="blog.html" class="blog-img" style="background-image: url(images/blog-1.jpg);">
+						<a href="blog.jsp" class="blog-img" style="background-image: url(images/blog-1.jpg);">
 							<p class="meta"><span class="day">18</span><span class="month">Apr</span></p>
 						</a>
 						<div class="desc">
 							<p class="admin"><span>Posted by:</span> <span>Noah Henderson</span></p>
-							<h2><a href="blog.html">Need workout motivation?</a></h2>
+							<h2><a href="blog.jsp">Need workout motivation?</a></h2>
 							<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>
 						</div>
 					</article>
 				</div>
 				<div class="col-md-4 animate-box">
 					<article class="article-entry">
-						<a href="blog.html" class="blog-img" style="background-image: url(images/blog-2.jpg);">
+						<a href="blog.jsp" class="blog-img" style="background-image: url(images/blog-2.jpg);">
 							<p class="meta"><span class="day">18</span><span class="month">Apr</span></p>
 						</a>
 						<div class="desc">
 							<p class="admin"><span>Posted by:</span> <span>Noah Henderson</span></p>
-							<h2><a href="blog.html">Need workout motivation?</a></h2>
+							<h2><a href="blog.jsp">Need workout motivation?</a></h2>
 							<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>
 						</div>
 					</article>
 				</div>
 				<div class="col-md-4 animate-box">
 					<article class="article-entry">
-						<a href="blog.html" class="blog-img" style="background-image: url(images/blog-3.jpg);">
+						<a href="blog.jsp" class="blog-img" style="background-image: url(images/blog-3.jpg);">
 							<p class="meta"><span class="day">18</span><span class="month">Apr</span></p>
 						</a>
 						<div class="desc">
 							<p class="admin"><span>Posted by:</span> <span>Noah Henderson</span></p>
-							<h2><a href="blog.html">Need workout motivation?</a></h2>
+							<h2><a href="blog.jsp">Need workout motivation?</a></h2>
 							<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>
 						</div>
 					</article>
@@ -655,26 +655,26 @@
 				<div class="col-md-3 colorlib-widget">
 					<h4>Recent Post</h4>
 					<div class="f-blog">
-						<a href="blog.html" class="blog-img" style="background-image: url(images/blog-1.jpg);">
+						<a href="blog.jsp" class="blog-img" style="background-image: url(images/blog-1.jpg);">
 						</a>
 						<div class="desc">
-							<h2><a href="blog.html">Tips for sexy body</a></h2>
+							<h2><a href="blog.jsp">Tips for sexy body</a></h2>
 							<p class="admin"><span>18 April 2018</span></p>
 						</div>
 					</div>
 					<div class="f-blog">
-						<a href="blog.html" class="blog-img" style="background-image: url(images/blog-2.jpg);">
+						<a href="blog.jsp" class="blog-img" style="background-image: url(images/blog-2.jpg);">
 						</a>
 						<div class="desc">
-							<h2><a href="blog.html">Tips for sexy body</a></h2>
+							<h2><a href="blog.jsp">Tips for sexy body</a></h2>
 							<p class="admin"><span>18 April 2018</span></p>
 						</div>
 					</div>
 					<div class="f-blog">
-						<a href="blog.html" class="blog-img" style="background-image: url(images/blog-3.jpg);">
+						<a href="blog.jsp" class="blog-img" style="background-image: url(images/blog-3.jpg);">
 						</a>
 						<div class="desc">
-							<h2><a href="blog.html">Tips for sexy body</a></h2>
+							<h2><a href="blog.jsp">Tips for sexy body</a></h2>
 							<p class="admin"><span>18 April 2018</span></p>
 						</div>
 					</div>

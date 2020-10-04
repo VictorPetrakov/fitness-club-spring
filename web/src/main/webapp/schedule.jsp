@@ -67,23 +67,37 @@
 						</div>
 						<div class="col-md-10 text-right menu-1">
 							<ul>
-								<li><a href="index.jsp">Главная</a></li>
-								<li class="has-dropdown active">
+								<li class="active"><a href="index.jsp">Главная</a></li>
+								<li class="has-dropdown">
 									<a href="classes.html">Группы</a>
 									<ul class="dropdown">
-										<li><a href="classes-single.html">Classes Single</a></li>
-										<li><a href="#">Cardio Classes</a></li>
-										<li><a href="#">Muscle Classes</a></li>
-										<li><a href="#">Fitness Classes</a></li>
-										<li><a href="#">Body Building</a></li>
+										<li><a href="classes-single.html">Индивидуальные занаятия</a></li>
+										<li><a href="#">Кроссфит группа</a></li>
+										<li><a href="#">Группа бокса</a></li>
+										<li><a href="#">Фитнес группа</a></li>
+										<li><a href="#">Бодибилдинг</a></li>
+										<li><a href="#">Силовой экстрим</a></li>
+										<li><a href="#">Йога</a></li>
+										<li><a href="#">Степ-аэробика</a></li>
 									</ul>
 								</li>
-								<li><a href="schedule.html">Расписание</a></li>
+								<li><a href="schedule.jsp">Расписание</a></li>
 								<li><a href="about.html">Тренеры</a></li>
 								<li><a href="event.html">События</a></li>
 								<li><a href="blog.html">Блог</a></li>
 								<li><a href="contact.html">Контакты</a></li>
-								<li><a href="login.html">Войти</a></li>
+								<c:if test="${sessionScope.statusAdmin == true || sessionScope.statusTrainer == true}">
+									<li><a href="trainerPage.jsp">Тренерская</a></li>
+								</c:if>
+								<c:if test="${sessionScope.statusAdmin == true}">
+									<li><a href=administration.jsp>Администрирование</a></li>
+								</c:if>
+								<c:if test="${sessionScope.userId == null}">
+									<li><a href="login.html">Войти</a></li>
+								</c:if>
+								<c:if test="${sessionScope.userId != null}">
+									<li><a href="logout">Выйти</a></li>
+								</c:if>
 							</ul>
 						</div>
 					</div>
@@ -99,8 +113,8 @@
 			   			<div class="row">
 				   			<div class="col-md-6 col-sm-12 col-md-offset-3 slider-text">
 				   				<div class="slider-text-inner text-center">
-				   					<h1>Classes</h1>
-				   					<h2><span><a href="index.jsp">Home</a> | <a href="classes.html">Classes</a> | Classes Single</span></h2>
+				   					<h1>Расписание</h1>
+				   					<h2><span><a href="index.jsp">Главная</a> | Расписание</span></h2>
 				   				</div>
 				   			</div>
 				   		</div>
@@ -110,157 +124,82 @@
 		  	</div>
 		</aside>
 		
-		<div class="colorlib-classes">
+		<div id="colorlib-schedule" class="colorlib-light-grey">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-8 animate-box">
-						<div class="classes">
-							<div class="classes-img classes-img-single" style="background-image: url(images/classes-1.jpg);"></div>
-							<div class="desc">
-								<h3><a href="#">Fitness Gym &amp; Cardio</a></h3>
-								<p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
-								<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-							</div>
-						</div>
-						<div class="classes-desc">
-							<div class="row row-pb-lg">
-								<div class="col-md-12">
-									<h3>Features</h3>
-								</div>
-								<div class="col-md-6">
-									<ul>
-										<li><i class="icon-check"></i> Physical Attractiveness</li>
-										<li><i class="icon-check"></i> Rehabilation</li>
-										<li><i class="icon-check"></i> General Physical Health</li>
-										<li><i class="icon-check"></i> Physical Attractiveness</li>
-									</ul>
-								</div>
-								<div class="col-md-6">
-									<ul>
-										<li><i class="icon-check"></i> Sport Performance</li>
-										<li><i class="icon-check"></i> Healthy Lifestyle</li>
-										<li><i class="icon-check"></i> Pleasure Activity</li>
-										<li><i class="icon-check"></i> Health Program</li>
-									</ul>
-								</div>
-								<div class="col-md-12">
-									<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-								</div>
-							</div>
-							<div class="row row-pb-lg">
-								<div class="col-md-12">
-									<h2 class="colorlib-heading-2">23 Comments</h2>
-									<div class="review">
-							   		<div class="user-img" style="background-image: url(images/person1.jpg)"></div>
-							   		<div class="desc">
-							   			<h4>
-							   				<span class="text-left">Jacob Webb</span>
-							   				<span class="text-right">24 March 2018</span>
-							   			</h4>
-							   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-							   			<p class="star">
-						   					<span class="text-left"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
-							   			</p>
-							   		</div>
-							   	</div>
-							   	<div class="review">
-							   		<div class="user-img" style="background-image: url(images/person2.jpg)"></div>
-							   		<div class="desc">
-							   			<h4>
-							   				<span class="text-left">Jacob Webb</span>
-							   				<span class="text-right">24 March 2018</span>
-							   			</h4>
-							   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-							   			<p class="star">
-						   					<span class="text-left"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
-							   			</p>
-							   		</div>
-							   	</div>
-							   	<div class="review">
-							   		<div class="user-img" style="background-image: url(images/person3.jpg)"></div>
-							   		<div class="desc">
-							   			<h4>
-							   				<span class="text-left">Jacob Webb</span>
-							   				<span class="text-right">24 March 2018</span>
-							   			</h4>
-							   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-							   			<p class="star">
-						   					<span class="text-left"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
-							   			</p>
-							   		</div>
-							   	</div>
-								</div>
-							</div>
-
-							<div class="row">
-								<div class="col-md-12">
-									<h2 class="colorlib-heading-2">Say something</h2>
-									<form action="#">
-										<div class="row form-group">
-											<div class="col-md-6">
-												<!-- <label for="fname">First Name</label> -->
-												<input type="text" id="fname" class="form-control" placeholder="Your firstname">
-											</div>
-											<div class="col-md-6">
-												<!-- <label for="lname">Last Name</label> -->
-												<input type="text" id="lname" class="form-control" placeholder="Your lastname">
-											</div>
-										</div>
-
-										<div class="row form-group">
-											<div class="col-md-12">
-												<!-- <label for="email">Email</label> -->
-												<input type="text" id="email" class="form-control" placeholder="Your email address">
-											</div>
-										</div>
-
-										<div class="row form-group">
-											<div class="col-md-12">
-												<!-- <label for="subject">Subject</label> -->
-												<input type="text" id="subject" class="form-control" placeholder="Your subject of this message">
-											</div>
-										</div>
-
-										<div class="row form-group">
-											<div class="col-md-12">
-												<!-- <label for="message">Message</label> -->
-												<textarea name="message" id="message" cols="30" rows="10" class="form-control" placeholder="Say something about us"></textarea>
-											</div>
-										</div>
-										<div class="form-group">
-											<input type="submit" value="Post Comment" class="btn btn-primary">
-										</div>
-									</form>	
-								</div>
-							</div>
-						</div>
+					<div class="col-md-8 col-md-offset-2 text-center colorlib-heading animate-box">
+						<h2>Our Class Schedule</h2>
+						<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name</p>
 					</div>
-
-					<div class="col-md-4">
-						<div class="side animate-box">
-							<h3>Class Details</h3>
-							<ul>
-								<li><span>Trainer:</span> <span>Alysha Reed</span></li>
-								<li><span>Time:</span> <span>2 Months</span></li>
-								<li><span>Price:</span> <span>$25 per month</span></li>
-								<li><span>Defficulty:</span> <span>High</span></li>
-								<li><span>Lesson:</span> <span>15</span></li>
+				</div>
+				<div class="row">
+					<div class="schedule text-center animate-box">
+						<div class="col-md-12">
+							<ul class="week">
+								<li class="active"><a href="#">Sunday</a></li>
+								<li><a href="#">Monday</a></li>
+								<li><a href="#">Tuesday</a></li>
+								<li><a href="#">Wednesday</a></li>
+								<li><a href="#">Thursday</a></li>
+								<li><a href="#">Friday</a></li>
+								<li><a href="#">Saturday</a></li>
 							</ul>
-							<p><a href="#" class="btn btn-primary" style="display: block">Book Now</a></p>
 						</div>
-						<div class="side animate-box">
-							<h3>Class Trainer</h3>
-							<div class="trainers-entry">
-								<div class="trainer-img" style="background-image: url(images/trainer-3.jpg)"></div>
-								<div class="desc">
-									<h3>Alysha Reed</h3>
-									<span>Body Building Trainer</span>
-								</div>
+						<div class="schedule-flex">
+							<div class="entry-forth">
+								<p class="icon"><span><i class="flaticon-gym"></i></span></p>
+								<p class="time"><span>06am - 8am</span></p>
+								<h3>Cardio Program</h3>
+								<p class="trainer"><span>Tom Scott</span></p>
+							</div>
+							<div class="entry-forth">
+								<p class="icon"><span><i class="flaticon-exercise-2"></i></span></p>
+								<p class="time"><span>06am - 8am</span></p>
+								<h3>Loose Weight Program</h3>
+								<p class="trainer"><span>Tom Scott</span></p>
+							</div>
+							<div class="entry-forth">
+								<p class="icon"><span><i class="flaticon-meditation"></i></span></p>
+								<p class="time"><span>06am - 8am</span></p>
+								<h3>Yoga Classes</h3>
+								<p class="trainer"><span>Tom Scott</span></p>
+							</div>
+							<div class="entry-forth">
+								<p class="icon"><span><i class="flaticon-gloves"></i></span></p>
+								<p class="time"><span>06am - 8am</span></p>
+								<h3>Boxing Program</h3>
+								<p class="trainer"><span>Tom Scott</span></p>
+							</div>
+						</div>
+						<div class="schedule-flex">
+							<div class="entry-forth">
+								<p class="icon"><span><i class="flaticon-martial-arts"></i></span></p>
+								<p class="time"><span>06am - 8am</span></p>
+								<h3>Karate Classes</h3>
+								<p class="trainer"><span>Tom Scott</span></p>
+							</div>
+							<div class="entry-forth">
+								<p class="icon"><span><i class="flaticon-weightlifting"></i></span></p>
+								<p class="time"><span>06am - 8am</span></p>
+								<h3>Body Building</h3>
+								<p class="trainer"><span>Tom Scott</span></p>
+							</div>
+							<div class="entry-forth">
+								<p class="icon"><span><i class="flaticon-swimmer"></i></span></p>
+								<p class="time"><span>06am - 8am</span></p>
+								<h3>Swimming Program</h3>
+								<p class="trainer"><span>Tom Scott</span></p>
+							</div>
+							<div class="entry-forth">
+								<p class="icon"><span><i class="flaticon-man"></i></span></p>
+								<p class="time"><span>06am - 8am</span></p>
+								<h3>Basic Exercise</h3>
+								<p class="trainer"><span>Tom Scott</span></p>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>	
+			</div>
 		</div>
 	
 		<div id="colorlib-subscribe" class="subs-img" style="background-image: url(images/img_bg_2.jpg);" data-stellar-background-ratio="0.5">
@@ -326,26 +265,26 @@
 					<div class="col-md-3 colorlib-widget">
 						<h4>Recent Post</h4>
 						<div class="f-blog">
-							<a href="blog.html" class="blog-img" style="background-image: url(images/blog-1.jpg);">
+							<a href="blog.jsp" class="blog-img" style="background-image: url(images/blog-1.jpg);">
 							</a>
 							<div class="desc">
-								<h2><a href="blog.html">Tips for sexy body</a></h2>
+								<h2><a href="blog.jsp">Tips for sexy body</a></h2>
 								<p class="admin"><span>18 April 2018</span></p>
 							</div>
 						</div>
 						<div class="f-blog">
-							<a href="blog.html" class="blog-img" style="background-image: url(images/blog-2.jpg);">
+							<a href="blog.jsp" class="blog-img" style="background-image: url(images/blog-2.jpg);">
 							</a>
 							<div class="desc">
-								<h2><a href="blog.html">Tips for sexy body</a></h2>
+								<h2><a href="blog.jsp">Tips for sexy body</a></h2>
 								<p class="admin"><span>18 April 2018</span></p>
 							</div>
 						</div>
 						<div class="f-blog">
-							<a href="blog.html" class="blog-img" style="background-image: url(images/blog-3.jpg);">
+							<a href="blog.jsp" class="blog-img" style="background-image: url(images/blog-3.jpg);">
 							</a>
 							<div class="desc">
-								<h2><a href="blog.html">Tips for sexy body</a></h2>
+								<h2><a href="blog.jsp">Tips for sexy body</a></h2>
 								<p class="admin"><span>18 April 2018</span></p>
 							</div>
 						</div>

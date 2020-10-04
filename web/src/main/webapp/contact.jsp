@@ -67,23 +67,37 @@
 						</div>
 						<div class="col-md-10 text-right menu-1">
 							<ul>
-								<li><a href="index.jsp">Главная</a></li>
+								<li class="active"><a href="index.jsp">Главная</a></li>
 								<li class="has-dropdown">
 									<a href="classes.html">Группы</a>
 									<ul class="dropdown">
-										<li><a href="classes-single.html">Classes Single</a></li>
-										<li><a href="#">Cardio Classes</a></li>
-										<li><a href="#">Muscle Classes</a></li>
-										<li><a href="#">Fitness Classes</a></li>
-										<li><a href="#">Body Building</a></li>
+										<li><a href="classes-single.html">Индивидуальные занаятия</a></li>
+										<li><a href="#">Кроссфит группа</a></li>
+										<li><a href="#">Группа бокса</a></li>
+										<li><a href="#">Фитнес группа</a></li>
+										<li><a href="#">Бодибилдинг</a></li>
+										<li><a href="#">Силовой экстрим</a></li>
+										<li><a href="#">Йога</a></li>
+										<li><a href="#">Степ-аэробика</a></li>
 									</ul>
 								</li>
-								<li><a href="schedule.html">Расписание</a></li>
+								<li><a href="schedule.jsp">Расписание</a></li>
 								<li><a href="about.html">Тренеры</a></li>
-								<li><a href="event.html">События</a></li>
+								<li><a href="event.jsp">События</a></li>
 								<li><a href="blog.html">Блог</a></li>
 								<li><a href="contact.html">Контакты</a></li>
-								<li><a href="login.html">Войти</a></li>
+								<c:if test="${sessionScope.statusAdmin == true || sessionScope.statusTrainer == true}">
+									<li><a href="trainerPage.jsp">Тренерская</a></li>
+								</c:if>
+								<c:if test="${sessionScope.statusAdmin == true}">
+									<li><a href=administration.jsp>Администрирование</a></li>
+								</c:if>
+								<c:if test="${sessionScope.userId == null}">
+									<li><a href="login.jsp">Войти</a></li>
+								</c:if>
+								<c:if test="${sessionScope.userId != null}">
+									<li><a href="logout">Выйти</a></li>
+								</c:if>
 							</ul>
 						</div>
 					</div>
@@ -99,8 +113,8 @@
 			   			<div class="row">
 				   			<div class="col-md-6 col-sm-12 col-md-offset-3 slider-text">
 				   				<div class="slider-text-inner text-center">
-				   					<h1>Blog</h1>
-				   					<h2><span><a href="index.jsp">Home</a> | Blog</span></h2>
+				   					<h1>Contact</h1>
+				   					<h2><span><a href="index.jsp">Home</a> | Contact</span></h2>
 				   				</div>
 				   			</div>
 				   		</div>
@@ -110,99 +124,73 @@
 		  	</div>
 		</aside>
 		
-		<div class="colorlib-event">
+		<div id="colorlib-contact">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-8 col-md-offset-2 text-center colorlib-heading animate-box">
-						<h2>Upcoming Events</h2>
-						<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name</p>
-					</div>
-				</div>
-				<div class="row row-pb-sm">
-					<div class="col-md-4 animate-box">
-						<div class="event-entry">
-							<div class="desc">
-								<p class="meta"><span class="day">19</span><span class="month">Apr</span></p>
-								<p class="organizer"><span>Organized by:</span> <span>Noah Henderson</span></p>
-								<h2><a href="event.html">Special Training for Karate at Robust Gym</a></h2>
-							</div>
-							<div class="location">
-								<span class="icon"><i class="icon-map"></i></span>
-								<p>291 South 21th Street, Suite 721 New York NY 10016</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 animate-box">
-						<div class="event-entry">
-							<div class="desc">
-								<p class="meta"><span class="day">19</span><span class="month">Apr</span></p>
-								<p class="organizer"><span>Organized by:</span> <span>Noah Henderson</span></p>
-								<h2><a href="event.html">World Yoga Day at Robust Gym</a></h2>
-							</div>
-							<div class="location">
-								<span class="icon"><i class="icon-map"></i></span>
-								<p>291 South 21th Street, Suite 721 New York NY 10016</p>
+					<div class="col-md-10 col-md-offset-1 animate-box">
+						<h2>Contact Information</h2>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="contact-info-wrap-flex">
+									<div class="con-info">
+										<p><span><i class="icon-location-2"></i></span> 198 West 21th Street, <br> Suite 721 New York NY 10016</p>
+									</div>
+									<div class="con-info">
+										<p><span><i class="icon-phone3"></i></span> <a href="tel://1234567920">+ 1235 2355 98</a></p>
+									</div>
+									<div class="con-info">
+										<p><span><i class="icon-paperplane"></i></span> <a href="mailto:info@yoursite.com">info@yoursite.com</a></p>
+									</div>
+									<div class="con-info">
+										<p><span><i class="icon-globe"></i></span> <a href="#">yourwebsite.com</a></p>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-4 animate-box">
-						<div class="event-entry">
-							<div class="desc">
-								<p class="meta"><span class="day">19</span><span class="month">Apr</span></p>
-								<p class="organizer"><span>Organized by:</span> <span>Noah Henderson</span></p>
-								<h2><a href="event.html">1st Anniversary of Robust Gym</a></h2>
+					<div class="col-md-10 col-md-offset-1 animate-box">
+						<h2>Get In Touch</h2>
+						<form action="#">
+							<div class="row form-group">
+								<div class="col-md-6">
+									<!-- <label for="fname">First Name</label> -->
+									<input type="text" id="fname" class="form-control" placeholder="Your firstname">
+								</div>
+								<div class="col-md-6">
+									<!-- <label for="lname">Last Name</label> -->
+									<input type="text" id="lname" class="form-control" placeholder="Your lastname">
+								</div>
 							</div>
-							<div class="location">
-								<span class="icon"><i class="icon-map"></i></span>
-								<p>291 South 21th Street, Suite 721 New York NY 10016</p>
+
+							<div class="row form-group">
+								<div class="col-md-12">
+									<!-- <label for="email">Email</label> -->
+									<input type="text" id="email" class="form-control" placeholder="Your email address">
+								</div>
 							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row row-pb-sm">
-					<div class="col-md-4 animate-box">
-						<div class="event-entry">
-							<div class="desc">
-								<p class="meta"><span class="day">19</span><span class="month">Apr</span></p>
-								<p class="organizer"><span>Organized by:</span> <span>Noah Henderson</span></p>
-								<h2><a href="event.html">Karate at Robust Gym</a></h2>
+
+							<div class="row form-group">
+								<div class="col-md-12">
+									<!-- <label for="subject">Subject</label> -->
+									<input type="text" id="subject" class="form-control" placeholder="Your subject of this message">
+								</div>
 							</div>
-							<div class="location">
-								<span class="icon"><i class="icon-map"></i></span>
-								<p>291 South 21th Street, Suite 721 New York NY 10016</p>
+
+							<div class="row form-group">
+								<div class="col-md-12">
+									<!-- <label for="message">Message</label> -->
+									<textarea name="message" id="message" cols="30" rows="10" class="form-control" placeholder="Say something about us"></textarea>
+								</div>
 							</div>
-						</div>
-					</div>
-					<div class="col-md-4 animate-box">
-						<div class="event-entry">
-							<div class="desc">
-								<p class="meta"><span class="day">19</span><span class="month">Apr</span></p>
-								<p class="organizer"><span>Organized by:</span> <span>Noah Henderson</span></p>
-								<h2><a href="event.html">World Yoga Day at Robust Gymnasium</a></h2>
+							<div class="form-group">
+								<input type="submit" value="Send Message" class="btn btn-primary">
 							</div>
-							<div class="location">
-								<span class="icon"><i class="icon-map"></i></span>
-								<p>291 South 21th Street, Suite 721 New York NY 10016</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 animate-box">
-						<div class="event-entry">
-							<div class="desc">
-								<p class="meta"><span class="day">19</span><span class="month">Apr</span></p>
-								<p class="organizer"><span>Organized by:</span> <span>Noah Henderson</span></p>
-								<h2><a href="event.html">1st Anniversary of Robust Gym</a></h2>
-							</div>
-							<div class="location">
-								<span class="icon"><i class="icon-map"></i></span>
-								<p>291 South 21th Street, Suite 721 New York NY 10016</p>
-							</div>
-						</div>
+						</form>		
 					</div>
 				</div>
 			</div>
 		</div>
-	
+		<div id="map" class="colorlib-map"></div>
 		<div id="colorlib-subscribe" class="subs-img" style="background-image: url(images/img_bg_2.jpg);" data-stellar-background-ratio="0.5">
 			<div class="overlay"></div>
 			<div class="container">
@@ -266,26 +254,26 @@
 					<div class="col-md-3 colorlib-widget">
 						<h4>Recent Post</h4>
 						<div class="f-blog">
-							<a href="blog.html" class="blog-img" style="background-image: url(images/blog-1.jpg);">
+							<a href="blog.jsp" class="blog-img" style="background-image: url(images/blog-1.jpg);">
 							</a>
 							<div class="desc">
-								<h2><a href="blog.html">Tips for sexy body</a></h2>
+								<h2><a href="blog.jsp">Tips for sexy body</a></h2>
 								<p class="admin"><span>18 April 2018</span></p>
 							</div>
 						</div>
 						<div class="f-blog">
-							<a href="blog.html" class="blog-img" style="background-image: url(images/blog-2.jpg);">
+							<a href="blog.jsp" class="blog-img" style="background-image: url(images/blog-2.jpg);">
 							</a>
 							<div class="desc">
-								<h2><a href="blog.html">Tips for sexy body</a></h2>
+								<h2><a href="blog.jsp">Tips for sexy body</a></h2>
 								<p class="admin"><span>18 April 2018</span></p>
 							</div>
 						</div>
 						<div class="f-blog">
-							<a href="blog.html" class="blog-img" style="background-image: url(images/blog-3.jpg);">
+							<a href="blog.jsp" class="blog-img" style="background-image: url(images/blog-3.jpg);">
 							</a>
 							<div class="desc">
-								<h2><a href="blog.html">Tips for sexy body</a></h2>
+								<h2><a href="blog.jsp">Tips for sexy body</a></h2>
 								<p class="admin"><span>18 April 2018</span></p>
 							</div>
 						</div>
@@ -342,6 +330,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="js/magnific-popup-options.js"></script>
 	<!-- Counters -->
 	<script src="js/jquery.countTo.js"></script>
+	<!-- Google Map -->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA&sensor=false"></script>
+	<script src="js/google_map.js"></script>
 	<!-- Main -->
 	<script src="js/main.js"></script>
 

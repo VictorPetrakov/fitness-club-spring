@@ -67,23 +67,37 @@
 						</div>
 						<div class="col-md-10 text-right menu-1">
 							<ul>
-								<li><a href="index.jsp">Главная</a></li>
-								<li class="has-dropdown active">
-									<a href="classes.html">Группы</a>
+								<li class="active"><a href="index.jsp">Главная</a></li>
+								<li class="has-dropdown">
+									<a href="classes.jsp">Группы</a>
 									<ul class="dropdown">
-										<li><a href="classes-single.html">Classes Single</a></li>
-										<li><a href="#">Cardio Classes</a></li>
-										<li><a href="#">Muscle Classes</a></li>
-										<li><a href="#">Fitness Classes</a></li>
-										<li><a href="#">Body Building</a></li>
+										<li><a href="classes-single.jsp">Индивидуальные занаятия</a></li>
+										<li><a href="#">Кроссфит группа</a></li>
+										<li><a href="#">Группа бокса</a></li>
+										<li><a href="#">Фитнес группа</a></li>
+										<li><a href="#">Бодибилдинг</a></li>
+										<li><a href="#">Силовой экстрим</a></li>
+										<li><a href="#">Йога</a></li>
+										<li><a href="#">Степ-аэробика</a></li>
 									</ul>
 								</li>
-								<li><a href="schedule.html">Расписание</a></li>
+								<li><a href="schedule.jsp">Расписание</a></li>
 								<li><a href="about.html">Тренеры</a></li>
-								<li><a href="event.html">События</a></li>
+								<li><a href="event.jsp">События</a></li>
 								<li><a href="blog.html">Блог</a></li>
-								<li><a href="contact.html">Контакты</a></li>
-								<li><a href="login.html">Войти</a></li>
+								<li><a href="contact.jsp">Контакты</a></li>
+								<c:if test="${sessionScope.statusAdmin == true || sessionScope.statusTrainer == true}">
+									<li><a href="trainerPage.jsp">Тренерская</a></li>
+								</c:if>
+								<c:if test="${sessionScope.statusAdmin == true}">
+									<li><a href=administration.jsp>Администрирование</a></li>
+								</c:if>
+								<c:if test="${sessionScope.userId == null}">
+									<li><a href="login.jsp">Войти</a></li>
+								</c:if>
+								<c:if test="${sessionScope.userId != null}">
+									<li><a href="logout">Выйти</a></li>
+								</c:if>
 							</ul>
 						</div>
 					</div>
@@ -99,8 +113,8 @@
 			   			<div class="row">
 				   			<div class="col-md-6 col-sm-12 col-md-offset-3 slider-text">
 				   				<div class="slider-text-inner text-center">
-				   					<h1>Группы</h1>
-				   					<h2><span><a href="index.jsp">Главная</a> | Группы</span></h2>
+				   					<h1>Blog</h1>
+				   					<h2><span><a href="index.jsp">Home</a> | Blog</span></h2>
 				   				</div>
 				   			</div>
 				   		</div>
@@ -110,124 +124,87 @@
 		  	</div>
 		</aside>
 		
-		<div class="colorlib-classes">
+		<div class="colorlib-blog">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-4 animate-box">
-						<div class="classes">
-							<div class="classes-img" style="background-image: url(images/classes-1.jpg);">
-								<span class="price text-center">$25.00<br><small>/month</small></span>
-							</div>
+						<article class="article-entry">
+							<a href="blog.jsp" class="blog-img" style="background-image: url(images/blog-1.jpg);">
+								<p class="meta"><span class="day">18</span><span class="month">Apr</span></p>
+							</a>
 							<div class="desc">
-								<h3><a href="#">Fitness Gym &amp; Cardio</a></h3>
-								<p>Pointing has no control about the blind texts it is an almost unorthographic life</p>
-								<p><a href="#" class="btn-learn">Learn More <i class="icon-arrow-right3"></i></a></p>
+								<p class="admin"><span>Posted by:</span> <span>Noah Henderson</span></p>
+								<h2><a href="blog.jsp">Need workout motivation</a></h2>
+								<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>
 							</div>
-						</div>
+						</article>
 					</div>
 					<div class="col-md-4 animate-box">
-						<div class="classes">
-							<div class="classes-img" style="background-image: url(images/classes-2.jpg);">
-								<span class="price text-center">$25.00<br><small>/month</small></span>
-							</div>
+						<article class="article-entry">
+							<a href="blog.jsp" class="blog-img" style="background-image: url(images/blog-2.jpg);">
+								<p class="meta"><span class="day">18</span><span class="month">Apr</span></p>
+							</a>
 							<div class="desc">
-								<h3><a href="#">Strength Training</a></h3>
-								<p>Pointing has no control about the blind texts it is an almost unorthographic life</p>
-								<p><a href="#" class="btn-learn">Learn More <i class="icon-arrow-right3"></i></a></p>
+								<p class="admin"><span>Posted by:</span> <span>Noah Henderson</span></p>
+								<h2><a href="blog.jsp">Need workout motivation</a></h2>
+								<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>
 							</div>
-						</div>
+						</article>
 					</div>
 					<div class="col-md-4 animate-box">
-						<div class="classes">
-							<div class="classes-img" style="background-image: url(images/classes-3.jpg);">
-								<span class="price text-center">$25.00<br><small>/month</small></span>
-							</div>
+						<article class="article-entry">
+							<a href="blog.jsp" class="blog-img" style="background-image: url(images/blog-3.jpg);">
+								<p class="meta"><span class="day">18</span><span class="month">Apr</span></p>
+							</a>
 							<div class="desc">
-								<h3><a href="#">Climbing Classes</a></h3>
-								<p>Pointing has no control about the blind texts it is an almost unorthographic life</p>
-								<p><a href="#" class="btn-learn">Learn More <i class="icon-arrow-right3"></i></a></p>
+								<p class="admin"><span>Posted by:</span> <span>Noah Henderson</span></p>
+								<h2><a href="blog.jsp">Need workout motivation</a></h2>
+								<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>
 							</div>
-						</div>
+						</article>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-4 animate-box">
-						<div class="classes">
-							<div class="classes-img" style="background-image: url(images/classes-4.jpg);">
-								<span class="price text-center">$25.00<br><small>/month</small></span>
-							</div>
+						<article class="article-entry">
+							<a href="blog.jsp" class="blog-img" style="background-image: url(images/blog-4.jpg);">
+								<p class="meta"><span class="day">18</span><span class="month">Apr</span></p>
+							</a>
 							<div class="desc">
-								<h3><a href="#">Fitness Gym &amp; Cardio</a></h3>
-								<p>Pointing has no control about the blind texts it is an almost unorthographic life</p>
-								<p><a href="#" class="btn-learn">Learn More <i class="icon-arrow-right3"></i></a></p>
+								<p class="admin"><span>Posted by:</span> <span>Noah Henderson</span></p>
+								<h2><a href="blog.jsp">Need workout motivation</a></h2>
+								<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>
 							</div>
-						</div>
+						</article>
 					</div>
 					<div class="col-md-4 animate-box">
-						<div class="classes">
-							<div class="classes-img" style="background-image: url(images/classes-5.jpg);">
-								<span class="price text-center">$25.00<br><small>/month</small></span>
-							</div>
+						<article class="article-entry">
+							<a href="blog.jsp" class="blog-img" style="background-image: url(images/blog-5.jpg);">
+								<p class="meta"><span class="day">18</span><span class="month">Apr</span></p>
+							</a>
 							<div class="desc">
-								<h3><a href="#">Strength Training</a></h3>
-								<p>Pointing has no control about the blind texts it is an almost unorthographic life</p>
-								<p><a href="#" class="btn-learn">Learn More <i class="icon-arrow-right3"></i></a></p>
+								<p class="admin"><span>Posted by:</span> <span>Noah Henderson</span></p>
+								<h2><a href="blog.jsp">Need workout motivation</a></h2>
+								<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>
 							</div>
-						</div>
+						</article>
 					</div>
 					<div class="col-md-4 animate-box">
-						<div class="classes">
-							<div class="classes-img" style="background-image: url(images/classes-6.jpg);">
-								<span class="price text-center">$25.00<br><small>/month</small></span>
-							</div>
+						<article class="article-entry">
+							<a href="blog.jsp" class="blog-img" style="background-image: url(images/blog-6.jpg);">
+								<p class="meta"><span class="day">18</span><span class="month">Apr</span></p>
+							</a>
 							<div class="desc">
-								<h3><a href="#">Climbing Classes</a></h3>
-								<p>Pointing has no control about the blind texts it is an almost unorthographic life</p>
-								<p><a href="#" class="btn-learn">Learn More <i class="icon-arrow-right3"></i></a></p>
+								<p class="admin"><span>Posted by:</span> <span>Noah Henderson</span></p>
+								<h2><a href="blog.jsp">Need workout motivation</a></h2>
+								<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>
 							</div>
-						</div>
+						</article>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-md-4 animate-box">
-						<div class="classes">
-							<div class="classes-img" style="background-image: url(images/classes-7.jpg);">
-								<span class="price text-center">$25.00<br><small>/month</small></span>
-							</div>
-							<div class="desc">
-								<h3><a href="#">Fitness Gym &amp; Cardio</a></h3>
-								<p>Pointing has no control about the blind texts it is an almost unorthographic life</p>
-								<p><a href="#" class="btn-learn">Learn More <i class="icon-arrow-right3"></i></a></p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 animate-box">
-						<div class="classes">
-							<div class="classes-img" style="background-image: url(images/classes-8.jpg);">
-								<span class="price text-center">$25.00<br><small>/month</small></span>
-							</div>
-							<div class="desc">
-								<h3><a href="#">Strength Training</a></h3>
-								<p>Pointing has no control about the blind texts it is an almost unorthographic life</p>
-								<p><a href="#" class="btn-learn">Learn More <i class="icon-arrow-right3"></i></a></p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 animate-box">
-						<div class="classes">
-							<div class="classes-img" style="background-image: url(images/classes-9.jpg);">
-								<span class="price text-center">$25.00<br><small>/month</small></span>
-							</div>
-							<div class="desc">
-								<h3><a href="#">Climbing Classes</a></h3>
-								<p>Pointing has no control about the blind texts it is an almost unorthographic life</p>
-								<p><a href="#" class="btn-learn">Learn More <i class="icon-arrow-right3"></i></a></p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>	
+			</div>
 		</div>
+
 	
 		<div id="colorlib-subscribe" class="subs-img" style="background-image: url(images/img_bg_2.jpg);" data-stellar-background-ratio="0.5">
 			<div class="overlay"></div>
@@ -292,26 +269,26 @@
 					<div class="col-md-3 colorlib-widget">
 						<h4>Recent Post</h4>
 						<div class="f-blog">
-							<a href="blog.html" class="blog-img" style="background-image: url(images/blog-1.jpg);">
+							<a href="blog.jsp" class="blog-img" style="background-image: url(images/blog-1.jpg);">
 							</a>
 							<div class="desc">
-								<h2><a href="blog.html">Tips for sexy body</a></h2>
+								<h2><a href="blog.jsp">Tips for sexy body</a></h2>
 								<p class="admin"><span>18 April 2018</span></p>
 							</div>
 						</div>
 						<div class="f-blog">
-							<a href="blog.html" class="blog-img" style="background-image: url(images/blog-2.jpg);">
+							<a href="blog.jsp" class="blog-img" style="background-image: url(images/blog-2.jpg);">
 							</a>
 							<div class="desc">
-								<h2><a href="blog.html">Tips for sexy body</a></h2>
+								<h2><a href="blog.jsp">Tips for sexy body</a></h2>
 								<p class="admin"><span>18 April 2018</span></p>
 							</div>
 						</div>
 						<div class="f-blog">
-							<a href="blog.html" class="blog-img" style="background-image: url(images/blog-3.jpg);">
+							<a href="blog.jsp" class="blog-img" style="background-image: url(images/blog-3.jpg);">
 							</a>
 							<div class="desc">
-								<h2><a href="blog.html">Tips for sexy body</a></h2>
+								<h2><a href="blog.jsp">Tips for sexy body</a></h2>
 								<p class="admin"><span>18 April 2018</span></p>
 							</div>
 						</div>
@@ -334,7 +311,7 @@
 						<div class="col-md-12 text-center">
 							<p>
 								<small class="block">&copy; <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a  target="_blank">VictorPetrakov</a>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></small><br> 
 								<small class="block">Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a>, <a href="http://pexels.com/" target="_blank">Pexels</a></small>
 							</p>

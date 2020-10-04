@@ -31,19 +31,33 @@
                             <li class="has-dropdown">
                                 <a href="classes.html">Группы</a>
                                 <ul class="dropdown">
-                                    <li><a href="classes-single.html">Classes Single</a></li>
-                                    <li><a href="#">Cardio Classes</a></li>
-                                    <li><a href="#">Muscle Classes</a></li>
-                                    <li><a href="#">Fitness Classes</a></li>
-                                    <li><a href="#">Body Building</a></li>
+                                    <li><a href="classes-single.html">Индивидуальные занаятия</a></li>
+                                    <li><a href="#">Кроссфит группа</a></li>
+                                    <li><a href="#">Группа бокса</a></li>
+                                    <li><a href="#">Фитнес группа</a></li>
+                                    <li><a href="#">Бодибилдинг</a></li>
+                                    <li><a href="#">Силовой экстрим</a></li>
+                                    <li><a href="#">Йога</a></li>
+                                    <li><a href="#">Степ-аэробика</a></li>
                                 </ul>
                             </li>
-                            <li><a href="schedule.html">Расписание</a></li>
+                            <li><a href="schedule.jsp">Расписание</a></li>
                             <li><a href="about.html">Тренеры</a></li>
                             <li><a href="event.html">События</a></li>
                             <li><a href="blog.html">Блог</a></li>
                             <li><a href="contact.html">Контакты</a></li>
-                            <li><a href="login.html">Войти</a></li>
+                            <c:if test="${sessionScope.statusAdmin == true || sessionScope.statusTrainer == true}">
+                                <li><a href="trainerPage.jsp">Тренерская</a></li>
+                            </c:if>
+                            <c:if test="${sessionScope.statusAdmin == true}">
+                                <li><a href=administration.jsp>Администрирование</a></li>
+                            </c:if>
+                            <c:if test="${sessionScope.userId == null}">
+                                <li><a href="login.jsp">Войти</a></li>
+                            </c:if>
+                            <c:if test="${sessionScope.userId != null}">
+                                <li><a href="logout">Выйти</a></li>
+                            </c:if>
                         </ul>
                     </div>
                 </div>
@@ -85,7 +99,7 @@
     </div>
 
     <div class="login-links">
-        <p class="text-center">Еще нету аккаунта? <a class="txt-brand" href="registration.html"><font color=#29aafe>Регистрируйся</font></a></p>
+        <p class="text-center">Еще нету аккаунта? <a class="txt-brand" href="registration.jsp"><font color=#29aafe>Регистрируйся</font></a></p>
     </div>
 
 </main>
