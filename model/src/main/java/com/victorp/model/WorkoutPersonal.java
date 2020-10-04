@@ -41,4 +41,20 @@ public class WorkoutPersonal {
     public void setTrainingTime(String trainingTime) {
         this.trainingTime = trainingTime;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Workout getWorkout() {
+        return workout;
+    }
+
+    public void setWorkout(Workout workout) {
+        this.workout = workout;
+    }
 }

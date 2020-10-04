@@ -6,7 +6,7 @@ public interface RegistrationService {
 
     void createClient(Client client, User user, UserRole userRole) throws Exception;
 
-    void createTrainer(Trainer trainer, User user, UserRole userRole) throws Exception;
+    void createTrainer(Trainer trainer, User user, UserRole userRole, Workout workout) throws Exception;
 
     void createAdmin(Admin admin, User user, UserRole userRole) throws Exception;
 

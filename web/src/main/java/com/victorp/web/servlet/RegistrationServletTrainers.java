@@ -3,6 +3,7 @@ package com.victorp.web.servlet;
 import com.victorp.model.Trainer;
 import com.victorp.model.User;
 import com.victorp.model.UserRole;
+import com.victorp.model.Workout;
 import com.victorp.services.RegistrationService;
 import com.victorp.services.impl.RegistrationServiceImpl;
 
@@ -32,6 +33,7 @@ public class RegistrationServletTrainers extends HttpServlet {
     final User user = new User();
     final Trainer trainer = new Trainer();
     final UserRole userRole = new UserRole();
+    final Workout workout = new Workout();
 
 
     @Override
@@ -79,7 +81,10 @@ public class RegistrationServletTrainers extends HttpServlet {
                 trainer.setLogin(login);
                 trainer.setTrainerIdentifier((long)(Math.random()*20000 - 0));
 
-                registrationService.createTrainer(trainer, user, userRole);
+                workout.setNameWorkout(group);
+                workout.setTrainer(trainer);
+
+                registrationService.createTrainer(trainer, user, userRole, workout);
 
             } else {
 

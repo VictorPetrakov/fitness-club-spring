@@ -50,7 +50,7 @@ public class HibernateClientDaoImpl implements ClientDao {
     @Override
     public Client getByLogin(String login) throws Exception {
         try (final Session session = sessionFactory.openSession()){
-            final Query<Client> query = session.createQuery("SELECT c FROM User c WHERE c.login = :login", Client.class);
+            final Query<Client> query = session.createQuery("SELECT c FROM Client c WHERE c.login = :login", Client.class);
             query.setParameter("login", login);
             return query.getSingleResult();
         }

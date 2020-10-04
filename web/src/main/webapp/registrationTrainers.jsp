@@ -1,3 +1,7 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored ="false" %>
+<%@ page errorPage="401.jsp" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
 <head>
@@ -91,11 +95,11 @@
                     <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
                     <select name="group" class="form-control" >
                         <option value="none" hidden="">Название группы</option>
-                        <option value="1">Бодибилдинг</option>
-                        <option value="2">Кроссфит</option>
-                        <option value="3">Йога</option>
-                        <option value="4">Групповые занятия</option>
-                        <option value="5">Аэробика</option>
+                        <option value="bodybuilding">Бодибилдинг</option>
+                        <option value="crossfit">Кроссфит</option>
+                        <option value="yoga">Йога</option>
+                        <option value="group">Групповые занятия</option>
+                        <option value="aerobics">Аэробика</option>
                     </select>
                 </div>
             </div>

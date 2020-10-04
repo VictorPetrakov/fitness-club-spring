@@ -24,13 +24,16 @@ public class RegistrationServiceImpl implements RegistrationService {
 
 
     @Override
-    public void createTrainer(Trainer trainer, User user, UserRole userRole) throws Exception {
+    public void createTrainer(Trainer trainer, User user, UserRole userRole, Workout workout) throws Exception {
         HibernateTrainerDaoImpl hibernateTrainerDao = new HibernateTrainerDaoImpl();
         HibernateUserDaoImpl hibernateUserDao = new HibernateUserDaoImpl();
         HibernateUserRoleDaoImpl hibernateUserRoleDao = new HibernateUserRoleDaoImpl();
+        HibernateWorkoutDaoImpl hibernateWorkoutDao = new HibernateWorkoutDaoImpl();
         hibernateUserDao.create(user);
         hibernateTrainerDao.create(trainer);
         hibernateUserRoleDao.create(userRole);
+        hibernateWorkoutDao.create(workout);
+
     }
 
     @Override

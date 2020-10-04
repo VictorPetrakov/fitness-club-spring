@@ -1,4 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored ="false" %>
+<%@ page errorPage="401.jsp" %>
 
 <!DOCTYPE HTML>
 <html>
@@ -135,7 +138,7 @@
                         <div class="classes-img" style="background-image: url(images/client.jpg);">
                         </div>
                         <div class="desc">
-                            <h3><a href="registration.jsp">Записать клиента на индивидуальное занятие</a></h3>
+                            <h3><a href="createWorkoutPersonal.jsp">Записать клиента на индивидуальное занятие</a></h3>
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,7 @@
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored ="false" %>
+<%@ page errorPage="401.jsp" %>
 
 <!DOCTYPE HTML>
 <html>
@@ -182,6 +184,15 @@
                         </div>
                         <div class="desc">
                             <h3><a href="adminView.jsp">Посмотреть всех администраторов</a></h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 animate-box">
+                    <div class="classes">
+                        <div class="classes-img" style="background-image: url(images/classes-6.jpg);">
+                        </div>
+                        <div class="desc">
+                            <h3><a href="createWorkoutPersonal.jsp">Создать занятие</a></h3>
                         </div>
                     </div>
                 </div>

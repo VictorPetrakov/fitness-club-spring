@@ -8,7 +8,7 @@ public interface GeneralDao <T>{
 
     List<T> getAll() throws Exception;
 
-    void create(T user) throws Exception;
+    void create(T item) throws Exception;
 
     void update(T item) throws Exception;
 
