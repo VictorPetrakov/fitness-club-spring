@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface GeneralDao <T>{
 
-    T get(Long id) throws Exception;
+    T getById(Long id) throws Exception;
 
     List<T> getAll() throws Exception;
 

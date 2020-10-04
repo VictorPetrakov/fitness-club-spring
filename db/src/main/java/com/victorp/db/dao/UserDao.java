@@ -6,10 +6,9 @@ import java.util.List;
 
 public interface UserDao extends GeneralDao<User> {
 
+    User getById(Long id) throws Exception;
 
     List<User> getAll() throws Exception;
-
-    User getById(Long id) throws Exception;
 
     User getByLogin(String login) throws Exception ;
 

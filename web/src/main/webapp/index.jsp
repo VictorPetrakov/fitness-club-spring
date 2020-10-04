@@ -92,15 +92,17 @@
 							<li><a href="event.html">События</a></li>
 							<li><a href="blog.html">Блог</a></li>
 							<li><a href="contact.html">Контакты</a></li>
-							<li><a href="TrainerPage.jsp">Тренерская</a></li>
-							<c:if test="${sessionScope.status == 1}">
+							<c:if test="${sessionScope.statusAdmin == true || sessionScope.statusTrainer == true}">
+								<li><a href="trainerPage.jsp">Тренерская</a></li>
+							</c:if>
+							<c:if test="${sessionScope.statusAdmin == true}">
 								<li><a href=administration.jsp>Администрирование</a></li>
 							</c:if>
 							<c:if test="${sessionScope.userId == null}">
 								<li><a href="login.html">Войти</a></li>
 							</c:if>
 							<c:if test="${sessionScope.userId != null}">
-								<li><a href="index.jsp">Выйти</a></li>
+								<li><a href="logout">Выйти</a></li>
 							</c:if>
 
 

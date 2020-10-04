@@ -54,10 +54,6 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     }
 
-    @Override
-    public void createUser(User user) throws Exception {
-
-    }
 
     @Override
     public User checkUser(String login) throws Exception {
@@ -69,11 +65,6 @@ public class RegistrationServiceImpl implements RegistrationService {
     public boolean checkUserRole(String name) throws Exception {
         HibernateUserRoleDaoImpl hibernateUserRoleDao = new HibernateUserRoleDaoImpl();
         return hibernateUserRoleDao.checkUserRole(name);
-    }
-    @Override
-    public boolean checkClient(String login) throws Exception {
-        HibernateClientDaoImpl hibernateClientDao = new HibernateClientDaoImpl();
-        return hibernateClientDao.checkClient(login);
     }
 
     @Override

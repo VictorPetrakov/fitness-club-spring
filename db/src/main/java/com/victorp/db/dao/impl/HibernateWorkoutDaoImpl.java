@@ -1,11 +1,8 @@
 package com.victorp.db.dao.impl;
 
 import com.victorp.db.HibernateUtil;
-import com.victorp.db.dao.TrainerDao;
-import com.victorp.model.Client;
-import com.victorp.model.Trainer;
-import com.victorp.model.User;
-import com.victorp.model.UserRole;
+import com.victorp.db.dao.WorkoutDao;
+import com.victorp.model.Workout;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.NativeQuery;
@@ -13,54 +10,52 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class HibernateTrainerDaoImpl implements TrainerDao {
+public class HibernateWorkoutDaoImpl implements WorkoutDao {
 
     private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     @Override
-    public Trainer getByLogin(String login) throws Exception {
+    public Workout getByName(String nameWorkout) throws Exception {
         try (final Session session = sessionFactory.openSession()){
-            final Query<Trainer> query = session.createQuery("SELECT c FROM Trainer c WHERE c.login = :login", Trainer.class);
-            query.setParameter("login", login);
+            final Query<Workout> query = session.createQuery("SELECT c FROM Workout c WHERE c.nameWorkout = :nameWorkout", Workout.class);
+            query.setParameter("nameWorkout", nameWorkout);
             return query.getSingleResult();
         }
     }
 
     @Override
-    public Trainer getByGroup(String group) throws Exception {
-        return null;
-    }
-
-    @Override
-    public Trainer getById(Long id) throws Exception {
-        return null;
-    }
-
-    @Override
-    public List<Trainer> getAll() throws Exception {
+    public Workout getById(Long id) throws Exception {
         try (final Session session = sessionFactory.openSession()){
-            final NativeQuery<Trainer> nativeQuery = session.createNativeQuery("SELECT * FROM trainer;", Trainer.class);
+            final Query<Workout> query = session.createQuery("SELECT c FROM Workout c WHERE c.id = :id", Workout.class);
+            query.setParameter("id", id);
+            return query.getSingleResult();
+        }
+    }
+
+    @Override
+    public List<Workout> getAll() throws Exception {
+        try (final Session session = sessionFactory.openSession()){
+            final NativeQuery<Workout> nativeQuery = session.createNativeQuery("SELECT * FROM workout;", Workout.class);
             return nativeQuery.getResultList();
         }
     }
 
     @Override
-    public void create(Trainer trainer) throws Exception {
+    public void create(Workout workout) throws Exception {
 
         try (final Session session = sessionFactory.openSession()){
             session.getTransaction().begin();
-            session.save(trainer);
+            session.save(workout);
             session.getTransaction().commit();
         }
     }
 
-
     @Override
-    public void update(Trainer trainer) throws Exception {
+    public void update(Workout workout) throws Exception {
 
         try (final Session session = sessionFactory.openSession()){
             session.getTransaction().begin();
-            session.update(trainer);
+            session.update(workout);
             session.getTransaction().commit();
         }
     }
@@ -70,8 +65,8 @@ public class HibernateTrainerDaoImpl implements TrainerDao {
 
         try (final Session session = sessionFactory.openSession()){
             session.getTransaction().begin();
-            final Trainer trainer = session.get(Trainer.class, id);
-            session.delete(trainer);
+            final Workout workout = session.get(Workout.class, id);
+            session.delete(workout);
             session.getTransaction().commit();
         }
     }

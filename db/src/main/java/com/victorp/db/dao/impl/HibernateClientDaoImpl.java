@@ -18,41 +18,6 @@ public class HibernateClientDaoImpl implements ClientDao {
     private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     @Override
-    public Client getByLogin(String login) throws Exception {
-        try (final Session session = sessionFactory.openSession()){
-            final Query<Client> query = session.createQuery("SELECT c FROM User c WHERE c.login = :login", Client.class);
-            query.setParameter("login", login);
-            return query.getSingleResult();
-        }
-
-    }
-
-    @Override
-    public Client signUp(String login, String password) throws Exception {
-        try (final Session session = sessionFactory.openSession()) {
-            final Query<Client> query = session.createQuery("SELECT c FROM User c WHERE c.login = :login AND c.password = :password"  , Client.class);
-            return query.getSingleResult();
-        }
-    }
-
-    @Override
-    public Client get(Long id) throws Exception {
-        try (final Session session = sessionFactory.openSession()){
-            return session.get(Client.class, id);
-        }
-
-    }
-
-    @Override
-    public List<Client> getAll() throws Exception {
-        try (final Session session = sessionFactory.openSession()){
-            final NativeQuery<Client> nativeQuery = session.createNativeQuery("SELECT * FROM client;", Client.class);
-            return nativeQuery.getResultList();
-        }
-
-    }
-
-    @Override
     public void create(Client client) throws Exception {
         try (final Session session = sessionFactory.openSession()){
             session.getTransaction().begin();
@@ -81,6 +46,44 @@ public class HibernateClientDaoImpl implements ClientDao {
         }
 
     }
+
+    @Override
+    public Client getByLogin(String login) throws Exception {
+        try (final Session session = sessionFactory.openSession()){
+            final Query<Client> query = session.createQuery("SELECT c FROM User c WHERE c.login = :login", Client.class);
+            query.setParameter("login", login);
+            return query.getSingleResult();
+        }
+
+    }
+
+    @Override
+    public Client signUp(String login, String password) throws Exception {
+        try (final Session session = sessionFactory.openSession()) {
+            final Query<Client> query = session.createQuery("SELECT c FROM User c WHERE c.login = :login AND c.password = :password"  , Client.class);
+            return query.getSingleResult();
+        }
+    }
+
+
+    @Override
+    public Client getById(Long id) throws Exception {
+        try (final Session session = sessionFactory.openSession()){
+            final Query<Client> query = session.createQuery("SELECT c FROM Client c WHERE c.id = :id", Client.class);
+            query.setParameter("id", id);
+            return query.getSingleResult();
+        }
+    }
+
+    @Override
+    public List<Client> getAll() throws Exception {
+        try (final Session session = sessionFactory.openSession()){
+            final NativeQuery<Client> nativeQuery = session.createNativeQuery("SELECT * FROM client;", Client.class);
+            return nativeQuery.getResultList();
+        }
+
+    }
+
     @Override
     public boolean checkClient(String login) {
         Client client = null;

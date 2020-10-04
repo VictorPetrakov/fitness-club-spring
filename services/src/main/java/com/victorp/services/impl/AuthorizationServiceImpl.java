@@ -28,29 +28,6 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     private AuthorizationServiceImpl(){}
 
     @Override
-    public Client authorizeClient(String login, String password) throws Exception{
-        HibernateClientDaoImpl hibernateClientDao = new HibernateClientDaoImpl();
-        Client client = hibernateClientDao.signUp(login, password);
-
-        return client;
-    }
-
-    @Override
-    public Admin authorizeAdmin(String login, String password) throws Exception {
-        HibernateAdminDaoImpl hibernateAdminDao = new HibernateAdminDaoImpl();
-        Admin admin = hibernateAdminDao.signUp(login, password);
-
-        return admin;
-    }
-
-    @Override
-    public Trainer authorizeTrainer(String login, String password) throws Exception {
-        HibernateTrainerDaoImpl hibernateTrainerDao = new HibernateTrainerDaoImpl();
-        Trainer trainer = hibernateTrainerDao.signUp(login,password);
-        return trainer;
-    }
-
-    @Override
     public User authorizeUser(String login, String password) throws Exception {
         HibernateUserDaoImpl hibernateUserDao = new HibernateUserDaoImpl();
         User user = hibernateUserDao.signUp(login,password);
