@@ -4,5 +4,5 @@ import com.victorp.model.WorkoutGroup;
 
 public interface WorkoutGroupDao extends GeneralDao<WorkoutGroup> {
 
-    WorkoutGroupDao getByTrainer() throws Exception;
+    WorkoutGroup getByNameWorkout(String nameWorkout) throws Exception;
 }

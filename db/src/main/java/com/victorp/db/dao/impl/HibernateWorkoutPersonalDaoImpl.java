@@ -22,7 +22,7 @@ public class HibernateWorkoutPersonalDaoImpl implements WorkoutPersonalDao {
 
     @Override
     public WorkoutPersonal getById(Long id) throws Exception {
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             final Query<WorkoutPersonal> query = session.createQuery("SELECT c FROM WorkoutPersonal c WHERE c.id = :id", WorkoutPersonal.class);
             query.setParameter("id", id);
             return query.getSingleResult();
@@ -31,7 +31,7 @@ public class HibernateWorkoutPersonalDaoImpl implements WorkoutPersonalDao {
 
     @Override
     public List<WorkoutPersonal> getAll() throws Exception {
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             final NativeQuery<WorkoutPersonal> nativeQuery = session.createNativeQuery("SELECT * FROM workoutpersonal;", WorkoutPersonal.class);
             return nativeQuery.getResultList();
         }
@@ -40,7 +40,7 @@ public class HibernateWorkoutPersonalDaoImpl implements WorkoutPersonalDao {
     @Override
     public void create(WorkoutPersonal workoutPersonal) throws Exception {
 
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
             session.save(workoutPersonal);
             session.getTransaction().commit();
@@ -50,7 +50,7 @@ public class HibernateWorkoutPersonalDaoImpl implements WorkoutPersonalDao {
     @Override
     public void update(WorkoutPersonal workoutPersonal) throws Exception {
 
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
             session.update(workoutPersonal);
             session.getTransaction().commit();
@@ -60,7 +60,7 @@ public class HibernateWorkoutPersonalDaoImpl implements WorkoutPersonalDao {
     @Override
     public void delete(Long id) throws Exception {
 
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
             final WorkoutPersonal workoutPersonal = session.get(WorkoutPersonal.class, id);
             session.delete(workoutPersonal);

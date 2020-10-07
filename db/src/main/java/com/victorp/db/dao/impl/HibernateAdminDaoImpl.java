@@ -20,14 +20,14 @@ public class HibernateAdminDaoImpl implements AdminDao {
     @Override
     public Admin signUp(String login, String password) throws Exception {
         try (final Session session = sessionFactory.openSession()) {
-            final Query<Admin> query = session.createQuery("SELECT c FROM User c WHERE c.login = :login AND c.password = :password"  , Admin.class);
+            final Query<Admin> query = session.createQuery("SELECT c FROM User c WHERE c.login = :login AND c.password = :password", Admin.class);
             return query.getSingleResult();
         }
     }
 
     @Override
     public Admin getByLogin(String login) throws Exception {
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             final Query<Admin> query = session.createQuery("SELECT c FROM Admin c WHERE c.login = :login", Admin.class);
             query.setParameter("login", login);
             return query.getSingleResult();
@@ -36,7 +36,7 @@ public class HibernateAdminDaoImpl implements AdminDao {
 
     @Override
     public Admin getById(Long id) throws Exception {
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             final Query<Admin> query = session.createQuery("SELECT c FROM Admin c WHERE c.id = :id", Admin.class);
             query.setParameter("id", id);
             return query.getSingleResult();
@@ -45,7 +45,7 @@ public class HibernateAdminDaoImpl implements AdminDao {
 
     @Override
     public List<Admin> getAll() throws Exception {
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             final NativeQuery<Admin> nativeQuery = session.createNativeQuery("SELECT * FROM admin;", Admin.class);
             return nativeQuery.getResultList();
         }
@@ -53,7 +53,7 @@ public class HibernateAdminDaoImpl implements AdminDao {
 
     @Override
     public void create(Admin admin) throws Exception {
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
             session.save(admin);
             session.getTransaction().commit();
@@ -62,7 +62,7 @@ public class HibernateAdminDaoImpl implements AdminDao {
 
     @Override
     public void update(Admin admin) throws Exception {
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
             session.update(admin);
             session.getTransaction().commit();
@@ -72,7 +72,7 @@ public class HibernateAdminDaoImpl implements AdminDao {
     @Override
     public void delete(Long id) throws Exception {
 
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
             final Admin admin = session.get(Admin.class, id);
             session.delete(admin);

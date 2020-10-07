@@ -17,7 +17,7 @@ public class Trainer {
     @GeneratedValue(generator = "one-one")
     @Column(name = "user_id")
     private Long id;
-    
+
     @Column
     private String login;
 
@@ -33,32 +33,39 @@ public class Trainer {
 
     public Trainer() {
     }
-    public Trainer(String login){
+
+    public Trainer(String login) {
 
         this.login = login;
     }
 
     public void setLogin(String login) {
+
         this.login = login;
     }
 
     public String getLogin() {
+
         return login;
     }
 
     public Long getTrainerIdentifier() {
+
         return trainerIdentifier;
     }
 
     public void setTrainerIdentifier(Long trainerIdentifier) {
+
         this.trainerIdentifier = trainerIdentifier;
     }
 
     public User getUser() {
+
         return user;
     }
 
     public void setUser(User user) {
+
         this.user = user;
     }
 

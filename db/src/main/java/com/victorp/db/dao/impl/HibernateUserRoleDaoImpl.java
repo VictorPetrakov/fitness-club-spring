@@ -18,7 +18,7 @@ public class HibernateUserRoleDaoImpl implements UserRoleDao {
 
     @Override
     public void create(UserRole userRole) throws Exception {
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
             session.saveOrUpdate(userRole);
             session.getTransaction().commit();
@@ -29,7 +29,7 @@ public class HibernateUserRoleDaoImpl implements UserRoleDao {
     @Override
     public void update(UserRole userRole) throws Exception {
 
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
             session.update(userRole);
             session.getTransaction().commit();
@@ -39,7 +39,7 @@ public class HibernateUserRoleDaoImpl implements UserRoleDao {
     @Override
     public void delete(Long id) throws Exception {
 
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
             final UserRole userRole = session.get(UserRole.class, id);
             session.delete(userRole);
@@ -52,23 +52,24 @@ public class HibernateUserRoleDaoImpl implements UserRoleDao {
 
         UserRole userRole = null;
         try (final Session session = sessionFactory.openSession()) {
-            final Query<UserRole> query = session.createQuery("SELECT c FROM UserRole c WHERE c.name = :name", UserRole.class).setParameter("name",name);
+            final Query<UserRole> query = session.createQuery("SELECT c FROM UserRole c WHERE c.name = :name", UserRole.class).setParameter("name", name);
             userRole = query.getSingleResult();
 
-        }catch (NoResultException nre){
+        } catch (NoResultException nre) {
 
         }
-        if (userRole != null){
+        if (userRole != null) {
             return true;
-        }else {
-            return  false;
+        } else {
+            return false;
         }
     }
+
     @Override
     public UserRole getUserRole(String name) {
         UserRole userRole;
         try (final Session session = sessionFactory.openSession()) {
-            final Query<UserRole> query = session.createQuery("SELECT c FROM UserRole c WHERE c.name = :name"  , UserRole.class).setParameter("name", name);
+            final Query<UserRole> query = session.createQuery("SELECT c FROM UserRole c WHERE c.name = :name", UserRole.class).setParameter("name", name);
             userRole = query.getSingleResult();
             return userRole;
         }
@@ -76,7 +77,7 @@ public class HibernateUserRoleDaoImpl implements UserRoleDao {
 
     @Override
     public UserRole getById(Long id) throws Exception {
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             final Query<UserRole> query = session.createQuery("SELECT c FROM UserRole c WHERE c.id = :id", UserRole.class);
             query.setParameter("id", id);
             return query.getSingleResult();
@@ -85,7 +86,7 @@ public class HibernateUserRoleDaoImpl implements UserRoleDao {
 
     @Override
     public List getAll() throws Exception {
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             final NativeQuery<UserRole> nativeQuery = session.createNativeQuery("SELECT * FROM user_role;", UserRole.class);
             return nativeQuery.getResultList();
         }

@@ -16,7 +16,7 @@ public class HibernateWorkoutDaoImpl implements WorkoutDao {
 
     @Override
     public Workout getByName(String nameWorkout) throws Exception {
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             final Query<Workout> query = session.createQuery("SELECT c FROM Workout c WHERE c.nameWorkout = :nameWorkout", Workout.class);
             query.setParameter("nameWorkout", nameWorkout);
             return query.getSingleResult();
@@ -25,7 +25,7 @@ public class HibernateWorkoutDaoImpl implements WorkoutDao {
 
     @Override
     public Workout getById(Long id) throws Exception {
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             final Query<Workout> query = session.createQuery("SELECT c FROM Workout c WHERE c.id = :id", Workout.class);
             query.setParameter("id", id);
             return query.getSingleResult();
@@ -34,7 +34,7 @@ public class HibernateWorkoutDaoImpl implements WorkoutDao {
 
     @Override
     public List<Workout> getAll() throws Exception {
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             final NativeQuery<Workout> nativeQuery = session.createNativeQuery("SELECT * FROM workout;", Workout.class);
             return nativeQuery.getResultList();
         }
@@ -43,7 +43,7 @@ public class HibernateWorkoutDaoImpl implements WorkoutDao {
     @Override
     public void create(Workout workout) throws Exception {
 
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
             session.save(workout);
             session.getTransaction().commit();
@@ -53,9 +53,9 @@ public class HibernateWorkoutDaoImpl implements WorkoutDao {
     @Override
     public void update(Workout workout) throws Exception {
 
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
-            session.update(workout);
+            session.saveOrUpdate(workout);
             session.getTransaction().commit();
         }
     }
@@ -63,7 +63,7 @@ public class HibernateWorkoutDaoImpl implements WorkoutDao {
     @Override
     public void delete(Long id) throws Exception {
 
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
             final Workout workout = session.get(Workout.class, id);
             session.delete(workout);

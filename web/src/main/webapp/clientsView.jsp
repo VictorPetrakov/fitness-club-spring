@@ -155,7 +155,7 @@
                             <tr>
                                 <td><c:out value="-----" default="----"/></td>
                                 <td><c:out value="${clients.login}" default="----"/></td>
-                                <td><c:out value="-----" default="----"/></td>
+                                <td><c:out value="${clients.nameGroup}" default="----"/></td>
                                 <td><c:out value="-----" default="----"/></td>
                                 <td><c:out value="-----" default="----"/></td>
                                 <td><c:out value="-----" default="----"/></td>

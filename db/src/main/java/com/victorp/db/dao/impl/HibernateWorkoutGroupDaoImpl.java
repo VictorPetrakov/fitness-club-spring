@@ -16,13 +16,17 @@ public class HibernateWorkoutGroupDaoImpl implements WorkoutGroupDao {
     private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     @Override
-    public WorkoutGroupDao getByTrainer() throws Exception {
-      return null;
+    public WorkoutGroup getByNameWorkout(String nameWorkout) throws Exception {
+        try (final Session session = sessionFactory.openSession()) {
+            final Query<WorkoutGroup> query = session.createQuery("SELECT c FROM WorkoutGroup c WHERE c.nameWorkout = :nameWorkout", WorkoutGroup.class);
+            query.setParameter("nameWorkout", nameWorkout);
+            return query.getSingleResult();
+        }
     }
 
     @Override
     public WorkoutGroup getById(Long id) throws Exception {
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             final Query<WorkoutGroup> query = session.createQuery("SELECT c FROM WorkoutGroup c WHERE c.id = :id", WorkoutGroup.class);
             query.setParameter("id", id);
             return query.getSingleResult();
@@ -31,7 +35,7 @@ public class HibernateWorkoutGroupDaoImpl implements WorkoutGroupDao {
 
     @Override
     public List<WorkoutGroup> getAll() throws Exception {
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             final NativeQuery<WorkoutGroup> nativeQuery = session.createNativeQuery("SELECT * FROM workoutgroup;", WorkoutGroup.class);
             return nativeQuery.getResultList();
         }
@@ -40,7 +44,7 @@ public class HibernateWorkoutGroupDaoImpl implements WorkoutGroupDao {
     @Override
     public void create(WorkoutGroup workoutGroup) throws Exception {
 
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
             session.save(workoutGroup);
             session.getTransaction().commit();
@@ -50,7 +54,7 @@ public class HibernateWorkoutGroupDaoImpl implements WorkoutGroupDao {
     @Override
     public void update(WorkoutGroup workoutGroup) throws Exception {
 
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
             session.update(workoutGroup);
             session.getTransaction().commit();
@@ -60,7 +64,7 @@ public class HibernateWorkoutGroupDaoImpl implements WorkoutGroupDao {
     @Override
     public void delete(Long id) throws Exception {
 
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
             final WorkoutGroup workoutGroup = session.get(WorkoutGroup.class, id);
             session.delete(workoutGroup);

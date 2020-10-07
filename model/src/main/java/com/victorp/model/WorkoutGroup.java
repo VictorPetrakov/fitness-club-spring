@@ -18,7 +18,10 @@ public class WorkoutGroup {
     @MapsId
     private Workout workout;
 
-    @OneToMany(mappedBy = "workoutGroup")
+    @Column
+    private String nameWorkout;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "workoutGroup", cascade = CascadeType.ALL)
     private List<Client> clientList;
     @Column
     private String trainingTime;
@@ -41,12 +44,8 @@ public class WorkoutGroup {
 
         this.clientList = clientList;
     }
+
     public void setClientToGroup(Client client) {
-
-        this.clientList.add(client);
-    }
-
-    public void setClientList(Client client){
 
         this.clientList.add(client);
     }
@@ -60,5 +59,28 @@ public class WorkoutGroup {
         this.trainingTime = trainingTime;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Workout getWorkout() {
+        return workout;
+    }
+
+    public void setWorkout(Workout workout) {
+        this.workout = workout;
+    }
+
+    public String getNameWorkout() {
+        return nameWorkout;
+    }
+
+    public void setNameWorkout(String nameWorkout) {
+        this.nameWorkout = nameWorkout;
+    }
 }
 

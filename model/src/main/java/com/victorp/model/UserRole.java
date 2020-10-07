@@ -25,7 +25,7 @@ public class UserRole {
     @Column
     private Boolean trainer;
 
-    @OneToMany(mappedBy = "userRole",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "userRole", fetch = FetchType.EAGER)
     private List<User> users = new ArrayList<>();
 
     public UserRole() {
@@ -38,11 +38,11 @@ public class UserRole {
     }
 
     public Long getId() {
+
         return id;
     }
 
-    public void setId(Long id)
-    {
+    public void setId(Long id) {
         this.id = id;
     }
 

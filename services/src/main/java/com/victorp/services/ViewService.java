@@ -6,7 +6,7 @@ import com.victorp.model.Trainer;
 
 import java.util.List;
 
-public interface ViewService  {
+public interface ViewService {
 
     List<Client> viewClients() throws Exception;
 

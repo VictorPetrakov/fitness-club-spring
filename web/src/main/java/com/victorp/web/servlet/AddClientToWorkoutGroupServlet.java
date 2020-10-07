@@ -3,10 +3,9 @@ package com.victorp.web.servlet;
 import com.victorp.model.Client;
 import com.victorp.model.User;
 import com.victorp.model.Workout;
-import com.victorp.model.WorkoutPersonal;
+import com.victorp.model.WorkoutGroup;
 import com.victorp.services.CreateWorkoutService;
 import com.victorp.services.impl.CreateWorkoutServiceImpl;
-
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,49 +15,56 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "CreateWorkoutPersonal", urlPatterns = "/createWorkoutPersonal")
-public class CreateWorkoutPersonalServlet extends HttpServlet {
+@WebServlet(name = "AddClientToWorkoutGroup", urlPatterns = "/addClientToWorkoutGroup")
+public class AddClientToWorkoutGroupServlet extends HttpServlet {
 
     public static final String LOGIN_PARAM = "loginClient";
     public static final String NAME_WORKOUT = "nameGroup";
-    private static final String DATE_TIME = "time";
 
     private final CreateWorkoutService createWorkoutService = CreateWorkoutServiceImpl.getInstance();
 
-    final WorkoutPersonal workoutPersonal = new WorkoutPersonal();
+    final WorkoutGroup workoutGroup = new WorkoutGroup();
     final Workout workout = new Workout();
     final Client client = new Client();
     final User user = new User();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         final String loginClient = req.getParameter(LOGIN_PARAM);
         final String nameWorkout = req.getParameter(NAME_WORKOUT);
-        final String trainingTime = req.getParameter(DATE_TIME);
 
+        WorkoutGroup foundWorkoutGroup;
         Workout foundWorkout;
         Client foundClient;
         User foundUser;
+
         try {
-            workoutPersonal.setClient(createWorkoutService.getByLogin(loginClient));
-            workoutPersonal.setWorkout(createWorkoutService.getByName(nameWorkout));
-            workoutPersonal.setTrainingTime(trainingTime);
+
+            foundWorkoutGroup = createWorkoutService.getWorkoutGroupByName(nameWorkout);
+
+            workoutGroup.setId(foundWorkoutGroup.getId());
+            workoutGroup.setNameWorkout(foundWorkoutGroup.getNameWorkout());
+            workoutGroup.setTrainingTime(foundWorkoutGroup.getTrainingTime());
+            workoutGroup.setClientList(foundWorkoutGroup.getClientList());
+            workoutGroup.setWorkout(foundWorkoutGroup.getWorkout());
+            workoutGroup.setClientToGroup(createWorkoutService.getByLogin(loginClient));
 
             foundWorkout = createWorkoutService.getByName(nameWorkout);
+
+            workout.setId(foundWorkout.getId());
             workout.setTrainer(foundWorkout.getTrainer());
             workout.setNameWorkout(foundWorkout.getNameWorkout());
+            workout.setWorkoutGroup(workoutGroup);
             workout.setWorkoutPersonalList(foundWorkout.getWorkoutPersonalList());
-            workout.setId(foundWorkout.getId());
-            workout.addWorkoutPersonal(workoutPersonal);
 
             foundClient = createWorkoutService.getByLogin(loginClient);
+
             client.setId(foundClient.getId());
             client.setLogin(foundClient.getLogin());
             client.setClientIdentifier(foundClient.getClientIdentifier());
             client.setUser(foundClient.getUser());
-            client.setWorkoutPersonal(workoutPersonal);
-            client.setNameGroup(nameWorkout);
+            client.setWorkoutGroup(workoutGroup);
+            client.setNameGroup(workoutGroup.getNameWorkout());
 
             foundUser = createWorkoutService.getUserByLogin(loginClient);
             user.setId(foundUser.getId());
@@ -72,12 +78,10 @@ public class CreateWorkoutPersonalServlet extends HttpServlet {
             user.setClient(foundUser.getClient());
             user.setUserRole(foundUser.getUserRole());
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        try {
-            createWorkoutService.createWorkoutPersonal(workoutPersonal, workout, client, user);
+            createWorkoutService.addToWorkoutGroup(workoutGroup, client, workout, user);
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -85,7 +89,7 @@ public class CreateWorkoutPersonalServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         final RequestDispatcher dispatcher = req.getRequestDispatcher("trainerPage.jsp");
         dispatcher.include(req, resp);
-
-
     }
+
+
 }

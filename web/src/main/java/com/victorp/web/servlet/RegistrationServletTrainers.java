@@ -53,6 +53,7 @@ public class RegistrationServletTrainers extends HttpServlet {
         user.setLastName(lastname);
         user.setBirthdate(birthdate);
         user.setEmail(email);
+        user.setGroup(group);
 
         try {
             if(registrationService.checkUser(login) == null){

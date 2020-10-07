@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Entity
 @Table(name = "admin")
-public class Admin{
+public class Admin {
 
     @Id
     @GenericGenerator(name = "one-one", strategy = "foreign",
@@ -31,32 +31,39 @@ public class Admin{
 
     public Admin() {
     }
-    public Admin(String login){
+
+    public Admin(String login) {
         this.login = login;
     }
 
 
     public String getLogin() {
+
         return login;
     }
 
     public void setLogin(String login) {
+
         this.login = login;
     }
 
     public Long getAdminIdentifier() {
+
         return adminIdentifier;
     }
 
     public void setAdminIdentifier(Long adminIdentifier) {
+
         this.adminIdentifier = adminIdentifier;
     }
 
     public User getUser() {
+
         return user;
     }
 
     public void setUser(User user) {
+
         this.user = user;
     }
 }

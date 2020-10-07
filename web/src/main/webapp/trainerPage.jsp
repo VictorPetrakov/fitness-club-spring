@@ -147,7 +147,16 @@
                         <div class="classes-img" style="background-image: url(images/trainer.jpeg);">
                         </div>
                         <div class="desc">
-                            <h3><a href="registrationTrainers.jsp">Добавить клиента в группу</a></h3>
+                            <h3><a href="addClientToGroupWorkout.jsp">Добавить клиента в группу</a></h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 animate-box">
+                    <div class="classes">
+                        <div class="classes-img" style="background-image: url(images/admin.jpg);">
+                        </div>
+                        <div class="desc">
+                            <h3><a href="createWorkoutGroup.jsp">Создать групповую тренировку</a></h3>
                         </div>
                     </div>
                 </div>

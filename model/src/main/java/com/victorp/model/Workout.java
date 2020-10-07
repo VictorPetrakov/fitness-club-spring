@@ -13,10 +13,11 @@ public class Workout {
     private String nameWorkout;
 
     @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "workout_trainer_id")
     @MapsId
     private Trainer trainer;
 
-    @OneToMany(mappedBy = "workout")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "workout", cascade = CascadeType.ALL)
     private List<WorkoutPersonal> workoutPersonalList;
 
     @OneToOne(mappedBy = "workout", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -60,6 +61,10 @@ public class Workout {
 
     public void setWorkoutPersonalList(List<WorkoutPersonal> workoutPersonalList) {
         this.workoutPersonalList = workoutPersonalList;
+    }
+
+    public void addWorkoutPersonal(WorkoutPersonal workoutPersonal) {
+        this.workoutPersonalList.add(workoutPersonal);
     }
 
     public WorkoutGroup getWorkoutGroup() {

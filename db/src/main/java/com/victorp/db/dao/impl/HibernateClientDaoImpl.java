@@ -19,7 +19,7 @@ public class HibernateClientDaoImpl implements ClientDao {
 
     @Override
     public void create(Client client) throws Exception {
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
             session.save(client);
             session.getTransaction().commit();
@@ -28,7 +28,7 @@ public class HibernateClientDaoImpl implements ClientDao {
 
     @Override
     public void update(Client client) throws Exception {
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
             session.update(client);
             session.getTransaction().commit();
@@ -38,7 +38,7 @@ public class HibernateClientDaoImpl implements ClientDao {
 
     @Override
     public void delete(Long id) throws Exception {
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
             final Client client = session.get(Client.class, id);
             session.delete(client);
@@ -49,7 +49,7 @@ public class HibernateClientDaoImpl implements ClientDao {
 
     @Override
     public Client getByLogin(String login) throws Exception {
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             final Query<Client> query = session.createQuery("SELECT c FROM Client c WHERE c.login = :login", Client.class);
             query.setParameter("login", login);
             return query.getSingleResult();
@@ -60,7 +60,7 @@ public class HibernateClientDaoImpl implements ClientDao {
     @Override
     public Client signUp(String login, String password) throws Exception {
         try (final Session session = sessionFactory.openSession()) {
-            final Query<Client> query = session.createQuery("SELECT c FROM User c WHERE c.login = :login AND c.password = :password"  , Client.class);
+            final Query<Client> query = session.createQuery("SELECT c FROM User c WHERE c.login = :login AND c.password = :password", Client.class);
             return query.getSingleResult();
         }
     }
@@ -68,7 +68,7 @@ public class HibernateClientDaoImpl implements ClientDao {
 
     @Override
     public Client getById(Long id) throws Exception {
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             final Query<Client> query = session.createQuery("SELECT c FROM Client c WHERE c.id = :id", Client.class);
             query.setParameter("id", id);
             return query.getSingleResult();
@@ -77,7 +77,7 @@ public class HibernateClientDaoImpl implements ClientDao {
 
     @Override
     public List<Client> getAll() throws Exception {
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             final NativeQuery<Client> nativeQuery = session.createNativeQuery("SELECT * FROM client;", Client.class);
             return nativeQuery.getResultList();
         }
@@ -88,15 +88,15 @@ public class HibernateClientDaoImpl implements ClientDao {
     public boolean checkClient(String login) {
         Client client = null;
         try (final Session session = sessionFactory.openSession()) {
-            final Query<Client> query = session.createQuery("SELECT c FROM Client c WHERE c.login = :login", Client.class).setParameter("login",login);
+            final Query<Client> query = session.createQuery("SELECT c FROM Client c WHERE c.login = :login", Client.class).setParameter("login", login);
             client = query.getSingleResult();
 
-        }catch (NoResultException nre){
+        } catch (NoResultException nre) {
 
         }
-        if(client != null){
+        if (client != null) {
             return true;
-        }else{
+        } else {
             return false;
         }
 

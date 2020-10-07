@@ -61,7 +61,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     @Override
     public User checkUser(String login) throws Exception {
         HibernateUserDaoImpl hibernateUserDao = new HibernateUserDaoImpl();
-        return  hibernateUserDao.checkUser(login);
+        return hibernateUserDao.checkUser(login);
     }
 
     @Override

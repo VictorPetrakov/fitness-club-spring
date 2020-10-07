@@ -2,7 +2,7 @@ package com.victorp.db.dao;
 
 import java.util.List;
 
-public interface GeneralDao <T>{
+public interface GeneralDao<T> {
 
     T getById(Long id) throws Exception;
 

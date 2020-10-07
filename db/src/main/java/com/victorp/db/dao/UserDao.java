@@ -10,12 +10,11 @@ public interface UserDao extends GeneralDao<User> {
 
     List<User> getAll() throws Exception;
 
-    User getByLogin(String login) throws Exception ;
+    User getByLogin(String login) throws Exception;
 
     User signUp(String login, String password) throws Exception;
 
     User checkUser(String login);
-
 
 
 }

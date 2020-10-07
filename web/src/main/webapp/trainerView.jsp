@@ -140,25 +140,11 @@
                     <h2>Тренеры фитнесс клуба</h2>
                     <table>
                         <tr>
-                            <th>id &ensp;</th>
                             <th>login &ensp;</th>
-                            <th>password &ensp;</th>
-                            <th>firstname &ensp;</th>
-                            <th>lastname &ensp;</th>
-                            <th>birthdate &ensp;</th>
-                            <th>email &ensp;</th>
-                            <th>groups &ensp;</th>
                         </tr>
                         <c:forEach items="${requestScope.trainers}" var="trainers">
                             <tr>
-                                <td><c:out value="${trainers.id}" default="----"/></td>
                                 <td><c:out value="${trainers.login}" default="----"/></td>
-                                <td><c:out value="${trainers.password}" default="----"/></td>
-                                <td><c:out value="${trainers.firstName}" default="----"/></td>
-                                <td><c:out value="${trainers.lastName}" default="----"/></td>
-                                <td><c:out value="${trainers.birthdate}" default="----"/></td>
-                                <td><c:out value="${trainers.email}" default="----"/></td>
-                                <td><c:out value="${trainers.group}" default="----"/></td>
                             </tr>
                         </c:forEach>
                     </table>

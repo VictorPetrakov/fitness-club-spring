@@ -12,7 +12,7 @@ import java.io.IOException;
 
 import static com.victorp.web.filter.AuthenticationFilter.*;
 
-@WebServlet(name = "LoginServlet" , urlPatterns = "/auth")
+@WebServlet(name = "LoginServlet", urlPatterns = "/auth")
 public class LoginServlet extends HttpServlet {
 
     public static final String LOGIN_PARAM = "login";
@@ -30,16 +30,16 @@ public class LoginServlet extends HttpServlet {
         try {
             user = authorizationService.authorizeUser(login, password);
             final String contextPath = req.getContextPath();
-            if(user != null){
+            if (user != null) {
                 final HttpSession session = req.getSession();
-                    session.setAttribute(USER_ID_PARAM, user.getId());
-                    session.setAttribute(STATUS_ADMIN, user.getUserRole().getAdmin());
-                    session.setAttribute(STATUS_TRAINER, user.getUserRole().getTrainer());
-                    req.setAttribute("username", user.getFirstName() + " " + user.getLastName());
-                    getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
-                    final Cookie myOwnCookie = new Cookie("MyOwnCookie", "PC");
-                    resp.addCookie(myOwnCookie);
-            }else{
+                session.setAttribute(USER_ID_PARAM, user.getId());
+                session.setAttribute(STATUS_ADMIN, user.getUserRole().getAdmin());
+                session.setAttribute(STATUS_TRAINER, user.getUserRole().getTrainer());
+                req.setAttribute("username", user.getFirstName() + " " + user.getLastName());
+                getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
+                final Cookie myOwnCookie = new Cookie("MyOwnCookie", "PC");
+                resp.addCookie(myOwnCookie);
+            } else {
                 resp.sendRedirect(contextPath + "/login.jsp");
             }
         } catch (Exception e) {

@@ -17,7 +17,7 @@ public class HibernateUserDaoImpl implements UserDao {
 
     @Override
     public User getByLogin(String login) throws Exception {
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             final Query<User> query = session.createQuery("SELECT c FROM User c WHERE c.login = :login", User.class);
             query.setParameter("login", login);
             return query.getSingleResult();
@@ -28,9 +28,9 @@ public class HibernateUserDaoImpl implements UserDao {
     @Override
     public User signUp(String login, String password) throws Exception {
         try (final Session session = sessionFactory.openSession()) {
-            final Query<User> query = session.createQuery("SELECT c FROM User c WHERE c.login = :login AND c.password = :password"  , User.class).setParameter("password", password).setParameter("login", login);
+            final Query<User> query = session.createQuery("SELECT c FROM User c WHERE c.login = :login AND c.password = :password", User.class).setParameter("password", password).setParameter("login", login);
             return query.getSingleResult();
-        }catch (NoResultException nre){
+        } catch (NoResultException nre) {
 
         }
         return null;
@@ -39,7 +39,7 @@ public class HibernateUserDaoImpl implements UserDao {
 
     @Override
     public User getById(Long id) throws Exception {
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             final Query<User> query = session.createQuery("SELECT c FROM User c WHERE c.id = :id", User.class);
             query.setParameter("id", id);
             return query.getSingleResult();
@@ -48,7 +48,7 @@ public class HibernateUserDaoImpl implements UserDao {
 
     @Override
     public List<User> getAll() throws Exception {
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             final NativeQuery<User> nativeQuery = session.createNativeQuery("SELECT * FROM user;", User.class);
             return nativeQuery.getResultList();
         }
@@ -57,7 +57,7 @@ public class HibernateUserDaoImpl implements UserDao {
 
     @Override
     public void create(User user) throws Exception {
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
             session.save(user);
             session.getTransaction().commit();
@@ -66,7 +66,7 @@ public class HibernateUserDaoImpl implements UserDao {
 
     @Override
     public void update(User user) throws Exception {
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
             session.update(user);
             session.getTransaction().commit();
@@ -77,7 +77,7 @@ public class HibernateUserDaoImpl implements UserDao {
     @Override
     public void delete(Long id) throws Exception {
 
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
             final User user = session.get(User.class, id);
             session.delete(user);
@@ -89,12 +89,12 @@ public class HibernateUserDaoImpl implements UserDao {
     @Override
     public User checkUser(String login) {
         try (final Session session = sessionFactory.openSession()) {
-            final Query<User> query = session.createQuery("SELECT c FROM User c WHERE c.login = :login"  , User.class).setParameter("login", login);
+            final Query<User> query = session.createQuery("SELECT c FROM User c WHERE c.login = :login", User.class).setParameter("login", login);
             return query.getSingleResult();
-        }catch (NoResultException nre){
+        } catch (NoResultException nre) {
 
         }
-       return null;
+        return null;
     }
 
 }

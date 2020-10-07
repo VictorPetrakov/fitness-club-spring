@@ -52,7 +52,7 @@ public class RegistrationServlet extends HttpServlet {
         user.setEmail(email);
 
         try {
-            if(registrationService.checkUser(login) == null){
+            if (registrationService.checkUser(login) == null) {
                 if (registrationService.checkUserRole("client") == false) {
                     userRole.setName("client");
                     userRole.setAdmin(false);
@@ -60,7 +60,7 @@ public class RegistrationServlet extends HttpServlet {
                     userRole.addUser(user);
                     user.setUserRole(userRole);
 
-                }else{
+                } else {
 
                     UserRole foundUserRole;
                     foundUserRole = registrationService.getUserRole("client");
@@ -76,7 +76,7 @@ public class RegistrationServlet extends HttpServlet {
 
                 client.setUser(user);
                 client.setLogin(login);
-                client.setClientIdentifier((long)(Math.random()*20000 - 0));
+                client.setClientIdentifier((long) (Math.random() * 20000 - 0));
 
                 registrationService.createClient(client, user, userRole);
 

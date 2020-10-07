@@ -19,7 +19,7 @@ public class HibernateTrainerDaoImpl implements TrainerDao {
 
     @Override
     public Trainer getByLogin(String login) throws Exception {
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             final Query<Trainer> query = session.createQuery("SELECT c FROM Trainer c WHERE c.login = :login", Trainer.class);
             query.setParameter("login", login);
             return query.getSingleResult();
@@ -38,7 +38,7 @@ public class HibernateTrainerDaoImpl implements TrainerDao {
 
     @Override
     public List<Trainer> getAll() throws Exception {
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             final NativeQuery<Trainer> nativeQuery = session.createNativeQuery("SELECT * FROM trainer;", Trainer.class);
             return nativeQuery.getResultList();
         }
@@ -47,7 +47,7 @@ public class HibernateTrainerDaoImpl implements TrainerDao {
     @Override
     public void create(Trainer trainer) throws Exception {
 
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
             session.save(trainer);
             session.getTransaction().commit();
@@ -58,7 +58,7 @@ public class HibernateTrainerDaoImpl implements TrainerDao {
     @Override
     public void update(Trainer trainer) throws Exception {
 
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
             session.update(trainer);
             session.getTransaction().commit();
@@ -68,7 +68,7 @@ public class HibernateTrainerDaoImpl implements TrainerDao {
     @Override
     public void delete(Long id) throws Exception {
 
-        try (final Session session = sessionFactory.openSession()){
+        try (final Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
             final Trainer trainer = session.get(Trainer.class, id);
             session.delete(trainer);
