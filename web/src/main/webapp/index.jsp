@@ -122,7 +122,7 @@
 							<div class="col-md-6 col-sm-12 col-md-offset-3 slider-text">
 								<div class="slider-text-inner text-center">
 									<h1>Только настойчивость приводит к цели!</h1>
-									<p><a href="#" class="btn btn-primary btn-lg btn-learn">Join Classes</a></p>
+									<p><a href="userPage.jsp" class="btn btn-primary btn-lg btn-learn">Join Classes</a></p>
 								</div>
 							</div>
 						</div>

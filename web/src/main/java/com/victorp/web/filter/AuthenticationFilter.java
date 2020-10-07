@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-@WebFilter(filterName = "AuthFilter", urlPatterns = "/contact.jsp", initParams = {@WebInitParam(name = AuthenticationFilter.IS_ACTIVE_FILTER_PARAM, value = "true", description = "activation of this filter")})
+@WebFilter(filterName = "AuthFilter", urlPatterns = {"/contact.jsp", "/userPage.jsp"}, initParams = {@WebInitParam(name = AuthenticationFilter.IS_ACTIVE_FILTER_PARAM, value = "true", description = "activation of this filter")})
 public class AuthenticationFilter implements Filter {
 
     public static final String USER_ID_PARAM = "userId";
