@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -22,15 +21,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-2">
-                    <div id="colorlib-logo"><a href="index.jsp">FitnessCamp</a></div>
+                    <div id="colorlib-logo"><a href="/index">FitnessCamp</a></div>
                 </div>
                 <div class="col-md-10 text-right menu-1">
                     <ul>
-                        <li class="active"><a href="index.jsp">Главная</a></li>
+                        <li class="active"><a href="/index">Главная</a></li>
                         <li class="has-dropdown">
-                            <a href="classes.html">Группы</a>
+                            <a href="/classes">Группы</a>
                             <ul class="dropdown">
-                                <li><a href="classes-single.html">Индивидуальные занаятия</a></li>
+                                <li><a href="/classes-single">Индивидуальные занаятия</a></li>
                                 <li><a href="#">Кроссфит группа</a></li>
                                 <li><a href="#">Группа бокса</a></li>
                                 <li><a href="#">Фитнес группа</a></li>
@@ -40,22 +39,22 @@
                                 <li><a href="#">Степ-аэробика</a></li>
                             </ul>
                         </li>
-                        <li><a href="schedule.html">Расписание</a></li>
-                        <li><a href="about.html">Тренеры</a></li>
-                        <li><a href="event.html">События</a></li>
-                        <li><a href="blog.html">Блог</a></li>
-                        <li><a href="contact.html">Контакты</a></li>
+                        <li><a href="/schedule">Расписание</a></li>
+                        <li><a href="/about">Тренеры</a></li>
+                        <li><a href="/event">События</a></li>
+                        <li><a href="/blog">Блог</a></li>
+                        <li><a href="/contact">Контакты</a></li>
                         <c:if test="${sessionScope.statusAdmin == true || sessionScope.statusTrainer == true}">
-                            <li><a href="trainerPage.html">Тренерская</a></li>
+                            <li><a href="/trainerPage">Тренерская</a></li>
                         </c:if>
                         <c:if test="${sessionScope.statusAdmin == true}">
-                            <li><a href=administration.html>Администрирование</a></li>
+                            <li><a href="/administration">Администрирование</a></li>
                         </c:if>
                         <c:if test="${sessionScope.userId == null}">
-                            <li><a href="login.html">Войти</a></li>
+                            <li><a href="/login">Войти</a></li>
                         </c:if>
                         <c:if test="${sessionScope.userId != null}">
-                            <li><a href="logout">Выйти</a></li>
+                            <li><a href="/logout">Выйти</a></li>
                         </c:if>
                     </ul>
                 </div>
@@ -68,49 +67,48 @@
     <div class="login-block">
         <img src="images/1.png" alt="your foto"><br>
 
-        <form modelAttribute="userForm" method="post">
+        <form th:action="@{/registration}" th:object="${userForm}" method="post">
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
-                    <input name="login" type="text" class="form-control" placeholder="Ваш логин">
+                    <input th:field="*{username}" name="username" type="text" class="form-control" placeholder="Ваш логин" >
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
-                    <input name="firstname" type="text" class="form-control" placeholder="Ваше имя">
+                    <input th:field="*{firstName}"name="firstname" type="text" class="form-control" placeholder="Ваше имя">
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
-                    <input name="lastname" type="text" class="form-control" placeholder="Ваша фамилия">
+                    <input th:field="*{lastName}" name="lastname" type="text" class="form-control" placeholder="Ваша фамилия">
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                    <input name="birthdate" type="date" class="form-control" value="2000-01-01"  min="1900-01-01" max="2020-12-31">
+                    <input th:field="*{birthdate}" name="birthdate" type="date" class="form-control" th:value="2000-01-01"  th:min="1900-01-01" th:max="2020-12-31">
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-at" aria-hidden="true"></i></span>
-                    <input name="email" type="text" class="form-control" placeholder="Ваш email">
+                    <input th:field="*{email}" name="email" type="text" class="form-control" placeholder="Ваш email">
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock ti-unlock"></i></span>
-                    <input path="password" type="password" class="form-control" placeholder="Ваш пароль">
+                    <input th:field="*{password}" name="password" type="password" class="form-control" placeholder="Ваш пароль">
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock ti-unlock"></i></span>
-                    <input path="passwordConfirm" type="password" class="form-control" placeholder="Повторите Ваш пароль">
-                    <errors path="password"></errors>
+                    <input th:field="*{passwordConfirm}"name="passwordConfirm" type="password" class="form-control" placeholder="Повторите Ваш пароль">
 
                 </div>
             </div>
@@ -129,7 +127,7 @@
     </div>
 
     <div class="login-links">
-        <p class="text-center"> <a class="txt-brand" href="index.jsp"><font color=#29aafe>На главную</font></a></p>
+        <p class="text-center"> <a class="txt-brand" href="/index"><font color=#29aafe>На главную</font></a></p>
     </div>
 
 </main>

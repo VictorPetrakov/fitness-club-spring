@@ -1,9 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page isELIgnored ="false" %>
-<%@ page errorPage="401.jsp" %>
 <!DOCTYPE html>
-<html>
+<html  xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
 
@@ -27,15 +23,15 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-2">
-                        <div id="colorlib-logo"><a href="index.jsp">FitnessCamp</a></div>
+                        <div id="colorlib-logo"><a href="/index">FitnessCamp</a></div>
                     </div>
                     <div class="col-md-10 text-right menu-1">
                         <ul>
-                            <li class="active"><a href="index.jsp">Главная</a></li>
+                            <li class="active"><a href="/index">Главная</a></li>
                             <li class="has-dropdown">
-                                <a href="classes.html">Группы</a>
+                                <a href="/classes">Группы</a>
                                 <ul class="dropdown">
-                                    <li><a href="classes-single.html">Индивидуальные занаятия</a></li>
+                                    <li><a href="/classes-single">Индивидуальные занаятия</a></li>
                                     <li><a href="#">Кроссфит группа</a></li>
                                     <li><a href="#">Группа бокса</a></li>
                                     <li><a href="#">Фитнес группа</a></li>
@@ -45,22 +41,22 @@
                                     <li><a href="#">Степ-аэробика</a></li>
                                 </ul>
                             </li>
-                            <li><a href="schedule.html">Расписание</a></li>
-                            <li><a href="about.html">Тренеры</a></li>
-                            <li><a href="event.html">События</a></li>
-                            <li><a href="blog.html">Блог</a></li>
-                            <li><a href="contact.html">Контакты</a></li>
+                            <li><a href="/schedule">Расписание</a></li>
+                            <li><a href="/about">Тренеры</a></li>
+                            <li><a href="/event">События</a></li>
+                            <li><a href="/blog">Блог</a></li>
+                            <li><a href="/contact">Контакты</a></li>
                             <c:if test="${sessionScope.statusAdmin == true || sessionScope.statusTrainer == true}">
-                                <li><a href="trainerPage.html">Тренерская</a></li>
+                                <li><a href="/trainerPage">Тренерская</a></li>
                             </c:if>
                             <c:if test="${sessionScope.statusAdmin == true}">
-                                <li><a href=administration.html>Администрирование</a></li>
+                                <li><a href="/administration">Администрирование</a></li>
                             </c:if>
                             <c:if test="${sessionScope.userId == null}">
-                                <li><a href="login.html">Войти</a></li>
+                                <li><a href="/login">Войти</a></li>
                             </c:if>
                             <c:if test="${sessionScope.userId != null}">
-                                <li><a href="logout">Выйти</a></li>
+                                <li><a href="/logout">Выйти</a></li>
                             </c:if>
                         </ul>
                     </div>
@@ -72,11 +68,11 @@
 
         <img src="images/1.png" alt="your foto"><br>
 
-        <form action="auth" method="post">
+        <form th:action="@{/login}" method="post">
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
-                    <input name="login" type="text" class="form-control" placeholder="Ваш логин">
+                    <input name="username" type="text" class="form-control" placeholder="Ваш логин">
                 </div>
             </div>
 
@@ -103,7 +99,7 @@
     </div>
 
     <div class="login-links">
-        <p class="text-center">Еще нету аккаунта? <a class="txt-brand" href="registration.html"><font color=#29aafe>Регистрируйся</font></a></p>
+        <p class="text-center">Еще нету аккаунта? <a class="txt-brand" href="/registration"><font color=#29aafe>Регистрируйся</font></a></p>
     </div>
 
 </main>

@@ -20,7 +20,7 @@ public class Client {
     private Long id;
 
     @Column
-    private String login;
+    private String username;
 
     @Column
     private Long clientIdentifier;
@@ -42,19 +42,19 @@ public class Client {
     public Client() {
     }
 
-    public Client(String login, String nameGroup) {
-        this.login = login;
+    public Client(String username, String nameGroup) {
+        this.username = username;
         this.nameGroup = nameGroup;
     }
 
-    public String getLogin() {
+    public String getUsername() {
 
-        return login;
+        return username;
     }
 
-    public void setLogin(String login) {
+    public void setUsername(String username) {
 
-        this.login = login;
+        this.username = username;
     }
 
     public Long getClientIdentifier() {

@@ -19,7 +19,7 @@ public class Trainer {
     private Long id;
 
     @Column
-    private String login;
+    private String username;
 
     @Column
     private Long trainerIdentifier;
@@ -34,19 +34,19 @@ public class Trainer {
     public Trainer() {
     }
 
-    public Trainer(String login) {
+    public Trainer(String username) {
 
-        this.login = login;
+        this.username = username;
     }
 
-    public void setLogin(String login) {
+    public void setUsername(String username) {
 
-        this.login = login;
+        this.username = username;
     }
 
-    public String getLogin() {
+    public String getUsername() {
 
-        return login;
+        return username;
     }
 
     public Long getTrainerIdentifier() {

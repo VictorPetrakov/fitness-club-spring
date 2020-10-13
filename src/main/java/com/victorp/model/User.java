@@ -2,21 +2,23 @@ package com.victorp.model;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Objects;
+import java.util.*;
 
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "login", nullable = false, length = 50, unique = true)
-    private String login;
+    @Column(name = "username", nullable = false, length = 50, unique = true)
+    private String username;
 
     @Column(name = "password", nullable = false, length = 50)
     private String password;
@@ -39,9 +41,9 @@ public class User {
     @Column(name = "groupFitness")
     private String group;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_role_id")
-    private UserRole userRole;
+    private Set<UserRole> userRole = new HashSet<>();
 
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Client client;
@@ -56,12 +58,15 @@ public class User {
     public User() {
     }
 
-    public UserRole getUserRole() {
+    public Set<UserRole> getUserRole() {
         return userRole;
     }
 
-    public void setUserRole(UserRole userRole) {
+    public void setUserRole(Set<UserRole> userRole) {
         this.userRole = userRole;
+    }
+    public void addUserRole(UserRole userRole) {
+        this.userRole.add(userRole);
     }
 
     public Client getClient() {
@@ -88,8 +93,8 @@ public class User {
         this.admin = admin;
     }
 
-    public User(String login, String password, String firstName, String lastName, String birthdate, String email, String group) {
-        this.login = login;
+    public User(String username, String password, String firstName, String lastName, String birthdate, String email, String group) {
+        this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -108,14 +113,39 @@ public class User {
         this.id = id;
     }
 
-    public String getLogin() {
+    public String getUsername() {
 
-        return login;
+        return username;
     }
 
-    public void setLogin(String login) {
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
 
-        this.login = login;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    public void setUsername(String username) {
+
+        this.username = username;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return getUserRole();
     }
 
     public String getPassword() {
@@ -189,7 +219,7 @@ public class User {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return Objects.equals(id, user.id) &&
-                Objects.equals(login, user.login) &&
+                Objects.equals(username, user.username) &&
                 Objects.equals(password, user.password) &&
                 Objects.equals(firstName, user.firstName) &&
                 Objects.equals(lastName, user.lastName) &&
@@ -200,7 +230,7 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, login, password, firstName, lastName, birthdate, email, group);
+        return Objects.hash(id, username, password, firstName, lastName, birthdate, email, group);
     }
 
 

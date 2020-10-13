@@ -2,16 +2,18 @@ package com.victorp.model;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Entity
 
 @Table(name = "user_role")
-public class UserRole {
+public class UserRole implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,8 +27,8 @@ public class UserRole {
     @Column
     private Boolean trainer;
 
-    @OneToMany(mappedBy = "userRole", fetch = FetchType.EAGER)
-    private List<User> users = new ArrayList<>();
+    @ManyToMany(mappedBy = "userRole", fetch = FetchType.EAGER)
+    private Set<User> users;
 
     public UserRole() {
     }
@@ -74,13 +76,11 @@ public class UserRole {
         return trainer;
     }
 
-    public List<User> getUsers() {
-
+    public Set<User> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
-
+    public void setUsers(Set<User> users) {
         this.users = users;
     }
 
@@ -89,4 +89,8 @@ public class UserRole {
         this.users.add(user);
     }
 
+    @Override
+    public String getAuthority() {
+        return name;
+    }
 }

@@ -20,7 +20,7 @@ public class Admin {
     private Long id;
 
     @Column
-    private String login;
+    private String username;
 
     @Column
     private Long adminIdentifier;
@@ -32,19 +32,20 @@ public class Admin {
     public Admin() {
     }
 
-    public Admin(String login) {
-        this.login = login;
+    public Admin(String username) {
+        this.username = username;
     }
 
 
-    public String getLogin() {
+    public String getUsername() {
 
-        return login;
+        return username;
     }
 
-    public void setLogin(String login) {
+    public void setUsername(String username) {
 
-        this.login = login;
+        this.username = username;
+
     }
 
     public Long getAdminIdentifier() {

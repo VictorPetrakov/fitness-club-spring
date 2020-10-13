@@ -1,7 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page isELIgnored ="false" %>
-<%@ page errorPage="401.jsp" %>
+
 
 <!DOCTYPE HTML>
 <html>
@@ -69,15 +66,15 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-2">
-                        <div id="colorlib-logo"><a href="index.jsp">FitnessCamp</a></div>
+                        <div id="colorlib-logo"><a href="/index">FitnessCamp</a></div>
                     </div>
                     <div class="col-md-10 text-right menu-1">
                         <ul>
-                            <li class="active"><a href="index.jsp">Главная</a></li>
+                            <li class="active"><a href="/index">Главная</a></li>
                             <li class="has-dropdown">
-                                <a href="classes.html">Группы</a>
+                                <a href="/classes">Группы</a>
                                 <ul class="dropdown">
-                                    <li><a href="classes-single.html">Индивидуальные занаятия</a></li>
+                                    <li><a href="/classes-single">Индивидуальные занаятия</a></li>
                                     <li><a href="#">Кроссфит группа</a></li>
                                     <li><a href="#">Группа бокса</a></li>
                                     <li><a href="#">Фитнес группа</a></li>
@@ -87,22 +84,22 @@
                                     <li><a href="#">Степ-аэробика</a></li>
                                 </ul>
                             </li>
-                            <li><a href="schedule.html">Расписание</a></li>
-                            <li><a href="about.html">Тренеры</a></li>
-                            <li><a href="event.html">События</a></li>
-                            <li><a href="blog.html">Блог</a></li>
-                            <li><a href="contact.html">Контакты</a></li>
+                            <li><a href="/schedule">Расписание</a></li>
+                            <li><a href="/about">Тренеры</a></li>
+                            <li><a href="/event">События</a></li>
+                            <li><a href="/blog">Блог</a></li>
+                            <li><a href="/contact">Контакты</a></li>
                             <c:if test="${sessionScope.statusAdmin == true || sessionScope.statusTrainer == true}">
-                                <li><a href="trainerPage.html">Тренерская</a></li>
+                                <li><a href="/trainerPage">Тренерская</a></li>
                             </c:if>
                             <c:if test="${sessionScope.statusAdmin == true}">
-                                <li><a href=administration.html>Администрирование</a></li>
+                                <li><a href=/administration>Администрирование</a></li>
                             </c:if>
                             <c:if test="${sessionScope.userId == null}">
-                                <li><a href="login.html">Войти</a></li>
+                                <li><a href="/login">Войти</a></li>
                             </c:if>
                             <c:if test="${sessionScope.userId != null}">
-                                <li><a href="logout">Выйти</a></li>
+                                <li><a href="/logout">Выйти</a></li>
                             </c:if>
                         </ul>
                     </div>
@@ -120,7 +117,7 @@
                             <div class="col-md-6 col-sm-12 col-md-offset-3 slider-text">
                                 <div class="slider-text-inner text-center">
                                     <h1>Администрирование</h1>
-                                    <h2><span><a href="index.jsp">Главная</a> | Администрирование</span></h2>
+                                    <h2><span><a href="/index">Главная</a> | Администрирование</span></h2>
                                 </div>
                             </div>
                         </div>
@@ -138,7 +135,7 @@
                         <div class="classes-img" style="background-image: url(images/client.jpg);">
                         </div>
                         <div class="desc">
-                            <h3><a href="registration.html">Зарегистрировать клиента</a></h3>
+                            <h3><a href="/registration">Зарегистрировать клиента</a></h3>
                         </div>
                     </div>
                 </div>
@@ -147,7 +144,7 @@
                         <div class="classes-img" style="background-image: url(images/trainer.jpeg);">
                         </div>
                         <div class="desc">
-                            <h3><a href="registrationTrainers.html">Зарегистрировать тренера</a></h3>
+                            <h3><a href="/registrationTrainers">Зарегистрировать тренера</a></h3>
                         </div>
                     </div>
                 </div>
@@ -156,7 +153,7 @@
                         <div class="classes-img" style="background-image: url(images/admin.jpg);">
                         </div>
                         <div class="desc">
-                            <h3><a href="registrationAdmin.html">Зарегистрировать администратора</a></h3>
+                            <h3><a href="/registrationAdmin">Зарегистрировать администратора</a></h3>
                         </div>
                     </div>
                 </div>
@@ -165,7 +162,7 @@
                         <div class="classes-img" style="background-image: url(images/classes-1.jpg);">
                         </div>
                         <div class="desc">
-                            <h3><a href="clientsView.html">Посмотреть всех клиентов</a></h3>
+                            <h3><a href="/clientsView">Посмотреть всех клиентов</a></h3>
                         </div>
                     </div>
                 </div>
@@ -174,7 +171,7 @@
                         <div class="classes-img" style="background-image: url(images/classes-6.jpg);">
                         </div>
                         <div class="desc">
-                            <h3><a href="trainerView.html">Посмотреть всех тренеров</a></h3>
+                            <h3><a href="/trainerView">Посмотреть всех тренеров</a></h3>
                         </div>
                     </div>
                 </div>
@@ -183,7 +180,7 @@
                         <div class="classes-img" style="background-image: url(images/classes-7.jpg);">
                         </div>
                         <div class="desc">
-                            <h3><a href="adminView.html">Посмотреть всех администраторов</a></h3>
+                            <h3><a href="/adminView">Посмотреть всех администраторов</a></h3>
                         </div>
                     </div>
                 </div>
@@ -192,7 +189,7 @@
                         <div class="classes-img" style="background-image: url(images/classes-6.jpg);">
                         </div>
                         <div class="desc">
-                            <h3><a href="createWorkoutPersonal.html">Создать занятие</a></h3>
+                            <h3><a href="/createWorkoutPersonal">Создать занятие</a></h3>
                         </div>
                     </div>
                 </div>

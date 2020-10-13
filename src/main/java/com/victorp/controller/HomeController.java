@@ -12,4 +12,9 @@ public class HomeController {
         return "index";
     }
 
+    @RequestMapping(value = "/classes", method = RequestMethod.GET)
+    public String classes() {
+        return "classes";
+    }
+
 }
