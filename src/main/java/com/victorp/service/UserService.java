@@ -13,8 +13,6 @@ public interface UserService {
 
     User getByUsername(String username) throws Exception;
 
-    User signUp(String login, String password) throws Exception;
-
     User checkUser(String login);
 
     User create(User item) throws Exception;

@@ -46,11 +46,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User signUp(String username, String password) throws Exception {
-        return userRepository.signUp(username, password);
-    }
-
-    @Override
     public User checkUser(String username) {
         return null;
     }
