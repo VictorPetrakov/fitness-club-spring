@@ -9,70 +9,43 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequestMapping(path = "/clientsView")
 @Controller
-public class ViewController {
-    @Autowired
-    private ClientService clientService;
+public class ViewUserController {
 
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private TrainerService trainerService;
 
-    @Autowired
-    private WorkoutService workoutService;
-
-    @GetMapping("/trainerView")
-    public String viewTrainer(Model model, String keyword) throws Exception{
-
-        if(keyword != null){
-            model.addAttribute("allTrainers", trainerService.findTrainerByKeyword(keyword));
-        }else {
-            model.addAttribute("allTrainers", trainerService.getAll());
-        }
-
-
-        return "trainerView";
-
-    }
-
-    @PostMapping("/trainerView")
-    public String deleteTrainer(@RequestParam Long idTrainer)throws Exception{
-
-        trainerService.delete(idTrainer);
-
-        return "redirect:/";
-
-    }
-
-    @GetMapping("/clientsView")
-    public String clientsView(Model model, String keyword) throws Exception{
+    @GetMapping
+    public String allUsers(Model model, String keyword) throws Exception{
         if(keyword != null){
             model.addAttribute("allUsers", userService.findUserByKeyword(keyword));
         }else {
-            model.addAttribute("allUsers", userService.getAll());
+            findPaginated(1, "firstName", "asc", model);
         }
 
-        return findPaginated(1, "firstName", "asc", model);
+        return "clientsView";
     }
+    @GetMapping("/showNewEmployeeForm/{id}")
+    public String showFormForUpdate(@PathVariable( value = "id") long id, Model model) throws Exception {
 
-    @PostMapping("/clientsView")
-    public String deleteUser(@RequestParam Long idUser)throws Exception{
+        User user = userService.getById(id);
 
-        userService.delete(idUser);
-
-        return "redirect:/";
-
+        model.addAttribute("userForm", user);
+        return "update_user";
     }
-    @GetMapping("/clientsView/{pageNo}")
+    @GetMapping("/deleteUser/{id}")
+    public String deleteUser(@PathVariable (value = "id") long id) throws Exception {
+
+        this.userService.delete(id);
+        return "redirect:/clientsView";
+    }
+    @GetMapping("/page/{pageNo}")
     public String findPaginated(@PathVariable(value = "pageNo") int pageNo,
                                 @RequestParam("sortField") String sortField,
                                 @RequestParam("sortDir") String sortDir,

@@ -83,17 +83,17 @@ public class RegistrationController {
 
         userValidator.validate(userForm, bindingResult);
         if (bindingResult.hasErrors()) {
-            return "registration";
+            return "registrationClient";
         }
 
-        if (!userService.saveClient(userForm)) {
-            model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
-            return "login";
-        }
+//        if (!this.userService.saveClient(userForm)) {
+//            model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
+//            return "login";
+//        }
 
         userService.create(userForm);
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(auth.getName());
+        userService.saveClient(userForm);
+
         return "administration";
     }
     @PostMapping("/registrationTrainers")

@@ -36,7 +36,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getById(Long id) throws Exception {
-        return null;
+        Optional<User> optional = userRepository.findById(id);
+        User user = null;
+        if (optional.isPresent()) {
+            user = optional.get();
+        } else {
+            throw new RuntimeException(" Employee not found for id :: " + id);
+        }
+        return user;
     }
 
     @Override
@@ -79,7 +86,7 @@ public class UserServiceImpl implements UserService {
 
         user.setClient(client);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+        userRepository.saveAndFlush(user);
         return true;
     }
 

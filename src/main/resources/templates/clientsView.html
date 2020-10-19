@@ -89,10 +89,10 @@
                             <li><a href="/blog">Блог</a></li>
                             <li><a href="/contact">Контакты</a></li>
 
-                            <li sec:authorize="isAuthenticated()" access="hasAnyRole(ADMIN, TRAINER)"><a href="/trainerPage">Тренерская</a></li>
+                            <li sec:authorize="hasAuthority('ROLE_TRAINER')"><a href="/trainerPage">Тренерская</a></li>
 
 
-                            <li sec:authorize="isAuthenticated()"><a href="/administration">Администрирование</a></li>
+                            <li sec:authorize="hasAuthority('ROLE_ADMIN')"><a href="/administration">Администрирование</a></li>
 
 
                             <li sec:authorize="isAnonymous()"><a href="/registration">Зарегистрироваться</a></h4></li>
@@ -135,7 +135,7 @@
                         <tr>
                             <th>id &ensp;</th>
                             <th>login &ensp;</th>
-                            <th><a th:href="@{'/clientsView/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}">firstname</a> &ensp;</th>
+                            <th><a th:href="@{'/clientsView/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}">firstname</a> &ensp;</th>
                             <th>lastname &ensp;</th>
                             <th>birthdate &ensp;</th>
                             <th>email &ensp;</th>
@@ -150,16 +150,10 @@
                             <td th:text="${user.email}"></td>
                             <td th:text="${user.group}"></td>
                             <td>
-                                <form th:action="@{/clientsView}" method="post">
-                                    <input type="hidden" name="idUser" th:value="${user.id}"/>
-                                    <button type="submit">Удалить</button>
-                                </form>
+                                <a th:href="@{/clientsView/deleteUser/{id}(id=${user.id})}" class="btn btn-danger">Удалить</a>
                             </td>
                             <td>
-                                <form th:action="@{/clientsView}" method="post">
-                                    <input type="hidden" name="idUserEdit" th:value="${user.id}"/>
-                                    <button type="submit">Изменить</button>
-                                </form>
+                                <a th:href="@{/clientsView/showNewEmployeeForm/{id}(id=${user.id})}" class="btn btn-primary">Изменить</a>
                             </td>
                         </tr>
                     </table>
@@ -175,17 +169,17 @@
                             </div>
                             <div class = "col-sm-1">
 					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
-						<a th:if="${currentPage != i}" th:href="@{'/clientsView/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<a th:if="${currentPage != i}" th:href="@{'/clientsView/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
 						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
 					</span>
                             </div>
                             <div class = "col-sm-1">
-                                <a th:if="${currentPage < totalPages}" th:href="@{'/clientsView/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+                                <a th:if="${currentPage < totalPages}" th:href="@{'/clientsView/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
                                 <span th:unless="${currentPage < totalPages}">Next</span>
                             </div>
 
                             <div class="col-sm-1">
-                                <a th:if="${currentPage < totalPages}" th:href="@{'/clientsView/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+                                <a th:if="${currentPage < totalPages}" th:href="@{'/clientsView/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
                                 <span th:unless="${currentPage < totalPages}">Last</span>
                             </div>
                         </div>

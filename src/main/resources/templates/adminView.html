@@ -45,6 +45,7 @@
 
         <!-- Theme style  -->
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/table_blur.css">
 
         <!-- Modernizr JS -->
         <script src="js/modernizr-2.6.2.min.js"></script>
@@ -64,7 +65,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-2">
-                        <div id="colorlib-logo"><a href="index.jsp">FitnessCamp</a></div>
+                        <div id="colorlib-logo"><a href="index">FitnessCamp</a></div>
                     </div>
                     <div class="col-md-10 text-right menu-1">
                         <ul>
@@ -88,10 +89,10 @@
                             <li><a href="/blog">Блог</a></li>
                             <li><a href="/contact">Контакты</a></li>
 
-                            <li sec:authorize="isAuthenticated()" access="hasAnyRole(ADMIN, TRAINER)"><a href="/trainerPage">Тренерская</a></li>
+                            <li sec:authorize="hasAuthority('ROLE_TRAINER')"><a href="/trainerPage">Тренерская</a></li>
 
 
-                            <li sec:authorize="isAuthenticated()"><a href="/administration">Администрирование</a></li>
+                            <li sec:authorize="hasAuthority('ROLE_ADMIN')"><a href="/administration">Администрирование</a></li>
 
 
                             <li sec:authorize="isAnonymous()"><a href="/registration">Зарегистрироваться</a></h4></li>
@@ -113,8 +114,8 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-12 col-md-offset-3 slider-text">
                                 <div class="slider-text-inner text-center">
-                                    <h1>Администрирование</h1>
-                                    <h2><span><a href="index.jsp">Главная</a> | Администрирование</span></h2>
+                                    <h1>Список тренеров</h1>
+                                    <h2><span><a href="index">Главная</a> | Список тренеров</span></h2>
                                 </div>
                             </div>
                         </div>
@@ -123,194 +124,192 @@
             </ul>
         </div>
     </aside>
-
-    <div class="colorlib-classes">
-        <div class="container">
-            <div class="row">
-                <div class="desc">
-
-                    <form action="viewAdmins" method="post">
-                        <button class="btn btn-primary btn-block" type="submit">показать</button>
-                    </form>
-                    <h2>Администраторы фитнесс клуба</h2>
-                    <table>
-                        <tr>
-                            <th>id &ensp;</th>
-                            <th>login &ensp;</th>
-                            <th>password &ensp;</th>
-                            <th>firstname &ensp;</th>
-                            <th>lastname &ensp;</th>
-                            <th>birthdate &ensp;</th>
-                            <th>email &ensp;</th>
-                        </tr>
-                        <c:forEach items="${requestScope.admin}" var="admin">
-
-                            <tr>
-                                <td><c:out value="${admin.id}" default="----"/></td>
-                                <td><c:out value="${admin.login}" default="----"/></td>
-                                <td><c:out value="${admin.password}" default="----"/></td>
-                                <td><c:out value="${admin.firstName}" default="----"/></td>
-                                <td><c:out value="${admin.lastName}" default="----"/></td>
-                                <td><c:out value="${admin.birthdate}" default="----"/></td>
-                                <td><c:out value="${admin.email}" default="----"/></td>
-                            </tr>
-                        </c:forEach>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="colorlib-subscribe" class="subs-img" style="background-image: url(images/img_bg_2.jpg);"
-         data-stellar-background-ratio="0.5">
+    <div id="colorlib-subscribe1" class="subs-img" style="white-space: normal;" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
+
         <div class="container">
             <div class="row">
-                <div class="col-md-8 col-md-offset-2 text-center colorlib-heading animate-box">
-                    <h2>Subscribe Newsletter</h2>
-                    <p>Subscribe our newsletter and get latest update</p>
-                </div>
-            </div>
-            <div class="row animate-box">
-                <div class="col-md-6 col-md-offset-3">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <form class="form-inline qbstp-header-subscribe">
-                                <div class="col-three-forth">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="email"
-                                               placeholder="Enter your email">
-                                    </div>
-                                </div>
-                                <div class="col-one-third">
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary">Subscribe Now</button>
-                                    </div>
-                                </div>
+                <table id="trainerList" class="table_blur">
+
+                    <tr>
+                        <th>id</th>
+                        <th>admin</th>
+
+                    </tr>
+                    <tr th:each = "admin: ${allAdmins}">
+                        <td th:text="${admin.adminIdentifier}"></td>
+                        <td th:text="${admin.username}"></td>
+                        <td>
+                            <form th:action="@{/adminView}" method="post">
+                                <input type="hidden" name="idAdmin" th:value="${admin.id}"/>
+                                <button type="submit">Удалить</button>
                             </form>
+                        </td>
+                    </tr>
+                </table>
+                <form th:action="@{/adminView}" method="get">
+                    <input id="txtSearch" type="text" name="keyword">
+                    <button type="submit">Найти</button>
+                </form>
+                <div id="colorlib-subscribe" class="subs-img" style="background-image: url(images/img_bg_2.jpg);"
+                     data-stellar-background-ratio="0.5">
+                    <div class="overlay"></div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2 text-center colorlib-heading animate-box">
+                                <h2>Subscribe Newsletter</h2>
+                                <p>Subscribe our newsletter and get latest update</p>
+                            </div>
+                        </div>
+                        <div class="row animate-box">
+                            <div class="col-md-6 col-md-offset-3">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <form class="form-inline qbstp-header-subscribe">
+                                            <div class="col-three-forth">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="email"
+                                                           placeholder="Enter your email">
+                                                </div>
+                                            </div>
+                                            <div class="col-one-third">
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-primary">Subscribe Now
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <footer id="colorlib-footer">
+                    <div class="container">
+                        <div class="row row-pb-md">
+                            <div class="col-md-3 colorlib-widget">
+                                <h4>About FitnessCamp</h4>
+                                <p>Far from the countries Vokalia and Consonantia, there live the blind texts.
+                                    Separated
+                                    they live in Bookmarksgrove right at the coast of the Semantics</p>
+                                <p>
+                                <ul class="colorlib-social-icons">
+                                    <li><a href="#"><i class="icon-twitter"></i></a></li>
+                                    <li><a href="#"><i class="icon-facebook"></i></a></li>
+                                    <li><a href="#"><i class="icon-linkedin"></i></a></li>
+                                    <li><a href="#"><i class="icon-dribbble"></i></a></li>
+                                </ul>
+                                </p>
+                            </div>
+                            <div class="col-md-3 colorlib-widget">
+                                <h4>Quick Links</h4>
+                                <p>
+                                <ul class="colorlib-footer-links">
+                                    <li><a href="#"><i class="icon-check"></i> About Us</a></li>
+                                    <li><a href="#"><i class="icon-check"></i> Testimonials</a></li>
+                                    <li><a href="#"><i class="icon-check"></i> Classes</a></li>
+                                    <li><a href="#"><i class="icon-check"></i> Blog</a></li>
+                                    <li><a href="#"><i class="icon-check"></i> Blog</a></li>
+                                    <li><a href="#"><i class="icon-check"></i> Contact</a></li>
+                                </ul>
+                                </p>
+                            </div>
+
+                            <div class="col-md-3 colorlib-widget">
+                                <h4>Recent Post</h4>
+                                <div class="f-blog">
+                                    <a href="blog.html" class="blog-img"
+                                       style="background-image: url(images/blog-1.jpg);">
+                                    </a>
+                                    <div class="desc">
+                                        <h2><a href="blog.html">Tips for sexy body</a></h2>
+                                        <p class="admin"><span>18 April 2018</span></p>
+                                    </div>
+                                </div>
+                                <div class="f-blog">
+                                    <a href="blog.html" class="blog-img"
+                                       style="background-image: url(images/blog-2.jpg);">
+                                    </a>
+                                    <div class="desc">
+                                        <h2><a href="blog.html">Tips for sexy body</a></h2>
+                                        <p class="admin"><span>18 April 2018</span></p>
+                                    </div>
+                                </div>
+                                <div class="f-blog">
+                                    <a href="blog.html" class="blog-img"
+                                       style="background-image: url(images/blog-3.jpg);">
+                                    </a>
+                                    <div class="desc">
+                                        <h2><a href="blog.html">Tips for sexy body</a></h2>
+                                        <p class="admin"><span>18 April 2018</span></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 colorlib-widget">
+                                <h4>Contact Info</h4>
+                                <ul class="colorlib-footer-links">
+                                    <li>291 South 21th Street, <br> Suite 721 New York NY 10016</li>
+                                    <li><a href="tel://1234567920"><i class="icon-phone"></i> + 1235 2355 98</a>
+                                    </li>
+                                    <li><a href="mailto:info@yoursite.com"><i class="icon-envelope"></i>
+                                        info@yoursite.com</a></li>
+                                    <li><a href="http://luxehotel.com"><i class="icon-location4"></i>
+                                        yourwebsite.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="copy">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <p>
+                                        <small class="block">&copy;
+                                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                            Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                                            All rights reserved | This template is made with <i class="icon-heart"
+                                                                                                aria-hidden="true"></i>
+                                            by <a target="_blank">VictorPetrakov</a>
+                                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                        </small><br>
+                                        <small class="block">Demo Images: <a href="http://unsplash.co/"
+                                                                             target="_blank">Unsplash</a>,
+                                            <a href="http://pexels.com/" target="_blank">Pexels</a></small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
             </div>
-        </div>
-    </div>
-    <footer id="colorlib-footer">
-        <div class="container">
-            <div class="row row-pb-md">
-                <div class="col-md-3 colorlib-widget">
-                    <h4>About Robust Gym</h4>
-                    <p>Far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live
-                        in Bookmarksgrove right at the coast of the Semantics</p>
-                    <p>
-                    <ul class="colorlib-social-icons">
-                        <li><a href="#"><i class="icon-twitter"></i></a></li>
-                        <li><a href="#"><i class="icon-facebook"></i></a></li>
-                        <li><a href="#"><i class="icon-linkedin"></i></a></li>
-                        <li><a href="#"><i class="icon-dribbble"></i></a></li>
-                    </ul>
-                    </p>
-                </div>
-                <div class="col-md-3 colorlib-widget">
-                    <h4>Quick Links</h4>
-                    <p>
-                    <ul class="colorlib-footer-links">
-                        <li><a href="#"><i class="icon-check"></i> About Us</a></li>
-                        <li><a href="#"><i class="icon-check"></i> Testimonials</a></li>
-                        <li><a href="#"><i class="icon-check"></i> Classes</a></li>
-                        <li><a href="#"><i class="icon-check"></i> Blog</a></li>
-                        <li><a href="#"><i class="icon-check"></i> Blog</a></li>
-                        <li><a href="#"><i class="icon-check"></i> Contact</a></li>
-                    </ul>
-                    </p>
-                </div>
 
-                <div class="col-md-3 colorlib-widget">
-                    <h4>Recent Post</h4>
-                    <div class="f-blog">
-                        <a href="blog.html" class="blog-img" style="background-image: url(images/blog-1.jpg);">
-                        </a>
-                        <div class="desc">
-                            <h2><a href="blog.html">Tips for sexy body</a></h2>
-                            <p class="admin"><span>18 April 2018</span></p>
-                        </div>
-                    </div>
-                    <div class="f-blog">
-                        <a href="blog.html" class="blog-img" style="background-image: url(images/blog-2.jpg);">
-                        </a>
-                        <div class="desc">
-                            <h2><a href="blog.html">Tips for sexy body</a></h2>
-                            <p class="admin"><span>18 April 2018</span></p>
-                        </div>
-                    </div>
-                    <div class="f-blog">
-                        <a href="blog.html" class="blog-img" style="background-image: url(images/blog-3.jpg);">
-                        </a>
-                        <div class="desc">
-                            <h2><a href="blog.html">Tips for sexy body</a></h2>
-                            <p class="admin"><span>18 April 2018</span></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 colorlib-widget">
-                    <h4>Contact Info</h4>
-                    <ul class="colorlib-footer-links">
-                        <li>291 South 21th Street, <br> Suite 721 New York NY 10016</li>
-                        <li><a href="tel://1234567920"><i class="icon-phone"></i> + 1235 2355 98</a></li>
-                        <li><a href="mailto:info@yoursite.com"><i class="icon-envelope"></i> info@yoursite.com</a></li>
-                        <li><a href="http://luxehotel.com"><i class="icon-location4"></i> yourwebsite.com</a></li>
-                    </ul>
-                </div>
+            <div class="gototop js-top">
+                <a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
             </div>
-        </div>
-        <div class="copy">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <p>
-                            <small class="block">&copy;
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                Copyright &copy;<script>document.write(new Date().getFullYear());</script>
-                                All rights reserved | This template is made with <i class="icon-heart"
-                                                                                    aria-hidden="true"></i> by <a
-                                        target="_blank">VictorPetrakov</a>
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            </small><br>
-                            <small class="block">Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a>,
-                                <a href="http://pexels.com/" target="_blank">Pexels</a></small>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-</div>
 
-<div class="gototop js-top">
-    <a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
-</div>
-
-<!-- jQuery -->
-<script src="js/jquery.min.js"></script>
-<!-- jQuery Easing -->
-<script src="js/jquery.easing.1.3.js"></script>
-<!-- Bootstrap -->
-<script src="js/bootstrap.min.js"></script>
-<!-- Waypoints -->
-<script src="js/jquery.waypoints.min.js"></script>
-<!-- Stellar Parallax -->
-<script src="js/jquery.stellar.min.js"></script>
-<!-- Flexslider -->
-<script src="js/jquery.flexslider-min.js"></script>
-<!-- Owl carousel -->
-<script src="js/owl.carousel.min.js"></script>
-<!-- Magnific Popup -->
-<script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/magnific-popup-options.js"></script>
-<!-- Counters -->
-<script src="js/jquery.countTo.js"></script>
-<!-- Main -->
-<script src="js/main.js"></script>
+            <!-- jQuery -->
+            <script src="js/jquery.min.js"></script>
+            <!-- jQuery Easing -->
+            <script src="js/jquery.easing.1.3.js"></script>
+            <!-- Bootstrap -->
+            <script src="js/bootstrap.min.js"></script>
+            <!-- Waypoints -->
+            <script src="js/jquery.waypoints.min.js"></script>
+            <!-- Stellar Parallax -->
+            <script src="js/jquery.stellar.min.js"></script>
+            <!-- Flexslider -->
+            <script src="js/jquery.flexslider-min.js"></script>
+            <!-- Owl carousel -->
+            <script src="js/owl.carousel.min.js"></script>
+            <!-- Magnific Popup -->
+            <script src="js/jquery.magnific-popup.min.js"></script>
+            <script src="js/magnific-popup-options.js"></script>
+            <!-- Counters -->
+            <script src="js/jquery.countTo.js"></script>
+            <!-- Main -->
+            <script src="js/main.js"></script>
 
 </body>
 </html>
