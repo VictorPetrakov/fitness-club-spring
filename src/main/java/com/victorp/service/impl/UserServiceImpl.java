@@ -7,6 +7,10 @@ import com.victorp.repository.UserRoleRepository;
 import com.victorp.repository.WorkoutRepository;
 import com.victorp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -122,6 +126,7 @@ public class UserServiceImpl implements UserService {
 
         trainer.setUser(user);
         trainer.setUsername(user.getUsername());
+        trainer.setNameGroup(user.getGroup());
         trainer.setTrainerIdentifier((long) (Math.random() * 20000 - 0));
 
         user.setTrainer(trainer);
@@ -135,6 +140,21 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
         workoutRepository.save(workout);
         return true;
+    }
+
+    @Override
+    public List<User> findUserByKeyword(String keyword) throws Exception {
+        return userRepository.findUserByKeyword(keyword);
+    }
+
+    @Override
+    public Page<User> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+
+        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+                Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize,  sort);
+        return this.userRepository.findAll(pageable);
     }
 
     @Override

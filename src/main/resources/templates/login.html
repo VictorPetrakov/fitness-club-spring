@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org">
+<html  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
 
@@ -27,7 +27,7 @@
                     </div>
                     <div class="col-md-10 text-right menu-1">
                         <ul>
-                            <li class="active"><a href="/index">Главная</a></li>
+                            <li class="active"><a href="index">Главная</a></li>
                             <li class="has-dropdown">
                                 <a href="/classes">Группы</a>
                                 <ul class="dropdown">
@@ -46,18 +46,17 @@
                             <li><a href="/event">События</a></li>
                             <li><a href="/blog">Блог</a></li>
                             <li><a href="/contact">Контакты</a></li>
-                            <c:if test="${sessionScope.statusAdmin == true || sessionScope.statusTrainer == true}">
-                                <li><a href="/trainerPage">Тренерская</a></li>
-                            </c:if>
-                            <c:if test="${sessionScope.statusAdmin == true}">
-                                <li><a href="/administration">Администрирование</a></li>
-                            </c:if>
-                            <c:if test="${sessionScope.userId == null}">
-                                <li><a href="/login">Войти</a></li>
-                            </c:if>
-                            <c:if test="${sessionScope.userId != null}">
-                                <li><a href="/logout">Выйти</a></li>
-                            </c:if>
+
+                            <li sec:authorize="isAuthenticated()" access="hasAnyRole(ADMIN, TRAINER)"><a href="/trainerPage">Тренерская</a></li>
+
+
+                            <li sec:authorize="isAuthenticated()"><a href="/administration">Администрирование</a></li>
+
+
+                            <li sec:authorize="isAnonymous()"><a href="/registration">Зарегистрироваться</a></h4></li>
+                            <li sec:authorize="isAuthenticated()"><a href="/logout">Выйти</a></li>
+                            <li sec:authorize="isAnonymous()"><a href="/login">Войти</a></li>
+
                         </ul>
                     </div>
                 </div>
@@ -68,6 +67,12 @@
 
         <img src="images/1.png" alt="your foto"><br>
 
+        <div th:if="${param.error}">
+            <font color="red">Invalid username or password.</font>
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
         <form th:action="@{/login}" method="post">
             <div class="form-group">
                 <div class="input-group">

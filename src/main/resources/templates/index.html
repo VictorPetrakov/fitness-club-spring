@@ -69,7 +69,7 @@
 					</div>
 					<div class="col-md-10 text-right menu-1">
 						<ul>
-							<li class="active"><a href="/index">Главная</a></li>
+							<li class="active"><a href="index">Главная</a></li>
 							<li class="has-dropdown">
 								<a href="/classes">Группы</a>
 								<ul class="dropdown">
@@ -92,7 +92,7 @@
 							<li sec:authorize="isAuthenticated()" access="hasAnyRole(ADMIN, TRAINER)"><a href="/trainerPage">Тренерская</a></li>
 
 
-							<li sec:authorize="isAuthenticated()" access="hasRole(ADMIN)"><a href="/administration">Администрирование</a></li>
+							<li sec:authorize="isAuthenticated()"><a href="/administration">Администрирование</a></li>
 
 
 							<li sec:authorize="isAnonymous()"><a href="/registration">Зарегистрироваться</a></h4></li>

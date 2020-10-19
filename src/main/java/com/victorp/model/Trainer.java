@@ -23,6 +23,8 @@ public class Trainer {
 
     @Column
     private Long trainerIdentifier;
+    @Column
+    private String nameGroup;
 
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
@@ -30,6 +32,14 @@ public class Trainer {
 
     @OneToOne(mappedBy = "trainer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Workout workout;
+
+    public Workout getWorkout() {
+        return workout;
+    }
+
+    public void setWorkout(Workout workout) {
+        this.workout = workout;
+    }
 
     public Trainer() {
     }
@@ -70,4 +80,19 @@ public class Trainer {
     }
 
 
+    public String getNameGroup() {
+        return nameGroup;
+    }
+
+    public void setNameGroup(String nameGroup) {
+        this.nameGroup = nameGroup;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

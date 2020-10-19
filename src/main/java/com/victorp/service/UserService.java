@@ -1,6 +1,8 @@
 package com.victorp.service;
 
+import com.victorp.model.Client;
 import com.victorp.model.User;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -23,4 +25,7 @@ public interface UserService {
     boolean saveClient(User user) throws Exception;
     boolean saveAdmin(User user) throws Exception;
     boolean saveTrainer(User user) throws Exception;
+    List<User> findUserByKeyword(String keyword) throws Exception;
+
+    Page<User> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
 }

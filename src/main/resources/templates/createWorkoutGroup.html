@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <head>
         <meta charset="utf-8">
@@ -64,15 +64,15 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-2">
-                        <div id="colorlib-logo"><a href="index.jsp">FitnessCamp</a></div>
+                        <div id="colorlib-logo"><a href="/index">FitnessCamp</a></div>
                     </div>
                     <div class="col-md-10 text-right menu-1">
                         <ul>
-                            <li class="active"><a href="index.jsp">Главная</a></li>
+                            <li class="active"><a href="index">Главная</a></li>
                             <li class="has-dropdown">
-                                <a href="classes.html">Группы</a>
+                                <a href="/classes">Группы</a>
                                 <ul class="dropdown">
-                                    <li><a href="classes-single.html">Индивидуальные занаятия</a></li>
+                                    <li><a href="/classes-single">Индивидуальные занаятия</a></li>
                                     <li><a href="#">Кроссфит группа</a></li>
                                     <li><a href="#">Группа бокса</a></li>
                                     <li><a href="#">Фитнес группа</a></li>
@@ -82,23 +82,22 @@
                                     <li><a href="#">Степ-аэробика</a></li>
                                 </ul>
                             </li>
-                            <li><a href="schedule.html">Расписание</a></li>
-                            <li><a href="about.html">Тренеры</a></li>
-                            <li><a href="event.html">События</a></li>
-                            <li><a href="blog.html">Блог</a></li>
-                            <li><a href="contact.html">Контакты</a></li>
-                            <c:if test="${sessionScope.statusAdmin == true || sessionScope.statusTrainer == true}">
-                                <li><a href="trainerPage.html">Тренерская</a></li>
-                            </c:if>
-                            <c:if test="${sessionScope.statusAdmin == true}">
-                                <li><a href=administration.html>Администрирование</a></li>
-                            </c:if>
-                            <c:if test="${sessionScope.userId == null}">
-                                <li><a href="login.html">Войти</a></li>
-                            </c:if>
-                            <c:if test="${sessionScope.userId != null}">
-                                <li><a href="logout">Выйти</a></li>
-                            </c:if>
+                            <li><a href="/schedule">Расписание</a></li>
+                            <li><a href="/about">Тренеры</a></li>
+                            <li><a href="/event">События</a></li>
+                            <li><a href="/blog">Блог</a></li>
+                            <li><a href="/contact">Контакты</a></li>
+
+                            <li sec:authorize="isAuthenticated()" access="hasAnyRole(ADMIN, TRAINER)"><a href="/trainerPage">Тренерская</a></li>
+
+
+                            <li sec:authorize="isAuthenticated()"><a href="/administration">Администрирование</a></li>
+
+
+                            <li sec:authorize="isAnonymous()"><a href="/registration">Зарегистрироваться</a></h4></li>
+                            <li sec:authorize="isAuthenticated()"><a href="/logout">Выйти</a></li>
+                            <li sec:authorize="isAnonymous()"><a href="/login">Войти</a></li>
+
                         </ul>
                     </div>
                 </div>
@@ -115,7 +114,7 @@
                             <div class="col-md-6 col-sm-12 col-md-offset-3 slider-text">
                                 <div class="slider-text-inner text-center">
                                     <h1>Тренерская</h1>
-                                    <h2><span><a href="index.jsp">Главная</a> | Тренерская</span></h2>
+                                    <h2><span><a href="/index">Главная</a> | Тренерская</span></h2>
                                 </div>
                             </div>
                         </div>
@@ -128,7 +127,7 @@
         <div class="overlay"></div>
         <div class="container">
             <div class="row">
-                <form action="createWorkoutGroup" method="post">
+                <form th:action="@{/createWorkoutGroup}" method="post">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-8 col-md-offset-2 text-center colorlib-heading animate-box">
@@ -141,21 +140,10 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <select name="nameGroup" class="form-control">
-                                                <option value="none" hidden="">Название группы</option>
-                                                <option value="bodybuilding">Бодибилдинг</option>
-                                                <option value="crossfit">Кроссфит</option>
-                                                <option value="yoga">Йога</option>
-                                                <option value="group">Групповые занятия</option>
-                                                <option value="aerobics">Аэробика</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
                                             <input type="datetime-local" class="form-control" name="time">
                                         </div>
 
                                         <button type="submit" class="btn btn-primary">Создать</button>
-
                                     </div>
                                 </div>
                             </div>
@@ -200,7 +188,7 @@
                     <div class="container">
                         <div class="row row-pb-md">
                             <div class="col-md-3 colorlib-widget">
-                                <h4>About Robust Gym</h4>
+                                <h4>About FitnessCamp</h4>
                                 <p>Far from the countries Vokalia and Consonantia, there live the blind texts.
                                     Separated
                                     they live in Bookmarksgrove right at the coast of the Semantics</p>

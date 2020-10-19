@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <head>
         <meta charset="utf-8">
@@ -68,11 +68,11 @@
                     </div>
                     <div class="col-md-10 text-right menu-1">
                         <ul>
-                            <li class="active"><a href="index.jsp">Главная</a></li>
+                            <li class="active"><a href="index">Главная</a></li>
                             <li class="has-dropdown">
-                                <a href="classes.html">Группы</a>
+                                <a href="/classes">Группы</a>
                                 <ul class="dropdown">
-                                    <li><a href="classes-single.html">Индивидуальные занаятия</a></li>
+                                    <li><a href="/classes-single">Индивидуальные занаятия</a></li>
                                     <li><a href="#">Кроссфит группа</a></li>
                                     <li><a href="#">Группа бокса</a></li>
                                     <li><a href="#">Фитнес группа</a></li>
@@ -82,23 +82,22 @@
                                     <li><a href="#">Степ-аэробика</a></li>
                                 </ul>
                             </li>
-                            <li><a href="schedule.html">Расписание</a></li>
-                            <li><a href="about.html">Тренеры</a></li>
-                            <li><a href="event.html">События</a></li>
-                            <li><a href="blog.html">Блог</a></li>
-                            <li><a href="contact.html">Контакты</a></li>
-                            <c:if test="${sessionScope.statusAdmin == true || sessionScope.statusTrainer == true}">
-                                <li><a href="trainerPage.html">Тренерская</a></li>
-                            </c:if>
-                            <c:if test="${sessionScope.statusAdmin == true}">
-                                <li><a href=administration.html>Администрирование</a></li>
-                            </c:if>
-                            <c:if test="${sessionScope.userId == null}">
-                                <li><a href="login.html">Войти</a></li>
-                            </c:if>
-                            <c:if test="${sessionScope.userId != null}">
-                                <li><a href="logout">Выйти</a></li>
-                            </c:if>
+                            <li><a href="/schedule">Расписание</a></li>
+                            <li><a href="/about">Тренеры</a></li>
+                            <li><a href="/event">События</a></li>
+                            <li><a href="/blog">Блог</a></li>
+                            <li><a href="/contact">Контакты</a></li>
+
+                            <li sec:authorize="isAuthenticated()" access="hasAnyRole(ADMIN, TRAINER)"><a href="/trainerPage">Тренерская</a></li>
+
+
+                            <li sec:authorize="isAuthenticated()"><a href="/administration">Администрирование</a></li>
+
+
+                            <li sec:authorize="isAnonymous()"><a href="/registration">Зарегистрироваться</a></h4></li>
+                            <li sec:authorize="isAuthenticated()"><a href="/logout">Выйти</a></li>
+                            <li sec:authorize="isAnonymous()"><a href="/login">Войти</a></li>
+
                         </ul>
                     </div>
                 </div>

@@ -6,6 +6,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.*;
 
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -17,11 +21,17 @@ public class User implements UserDetails{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
+    @NotEmpty
+    @Size(min=4, max=20)
     @Column(name = "username", nullable = false, length = 50, unique = true)
     private String username;
 
-    @Column(name = "password", nullable = false, length = 50)
+    @NotEmpty
+    @Size(min=4)
+    @Column(name = "password", nullable = false, length = 1000)
     private String password;
+
 
     @Transient
     private String passwordConfirm;
@@ -35,6 +45,8 @@ public class User implements UserDetails{
     @Column(name = "birthdate")
     private String birthdate;
 
+    @NotEmpty
+    @Email
     @Column(name = "email")
     private String email;
 

@@ -6,6 +6,8 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Entity
@@ -19,6 +21,8 @@ public class Client {
     @Column(name = "user_id")
     private Long id;
 
+    @NotNull
+    @NotEmpty
     @Column
     private String username;
 
@@ -42,6 +46,9 @@ public class Client {
     public Client() {
     }
 
+    public Client(String username){
+        this.username = username;
+    }
     public Client(String username, String nameGroup) {
         this.username = username;
         this.nameGroup = nameGroup;
@@ -115,6 +122,13 @@ public class Client {
     public void setNameGroup(String nameGroup) {
 
         this.nameGroup = nameGroup;
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                  username + '\'' +
+                '}';
     }
 }
 

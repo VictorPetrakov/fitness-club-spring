@@ -5,6 +5,8 @@ import com.victorp.service.SecurityService;
 import com.victorp.service.UserService;
 import com.victorp.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,10 +38,16 @@ public class RegistrationController {
     }
 
     @GetMapping("/registration")
-    public String registrationClient(Model model) {
+    public String registration(Model model) {
         model.addAttribute("userForm", new User());
 
         return "registration";
+    }
+    @GetMapping("/registrationClient")
+    public String registrationClient(Model model) {
+        model.addAttribute("userForm", new User());
+
+        return "registrationClient";
     }
     @GetMapping("/registrationAdmin")
     public String registrationAdmin(Model model) {
@@ -55,6 +63,22 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
+    public String registrationClient(@ModelAttribute("userForm") @Valid User userForm, BindingResult bindingResult, Model model) throws Exception {
+
+        if (bindingResult.hasErrors()) {
+            return "registration";
+        }
+
+        if (!userService.saveClient(userForm)) {
+            model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
+            return "login";
+        }
+
+        userService.create(userForm);
+        securityService.autoLogin(userForm.getUsername(), userForm.getPasswordConfirm());
+        return "redirect:/";
+    }
+    @PostMapping("/registrationClient")
     public String addClient(@ModelAttribute("userForm") @Valid User userForm, BindingResult bindingResult, Model model) throws Exception {
 
         userValidator.validate(userForm, bindingResult);
@@ -68,8 +92,9 @@ public class RegistrationController {
         }
 
         userService.create(userForm);
-        securityService.autoLogin(userForm.getUsername(), userForm.getPasswordConfirm());
-        return "redirect:/";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getName());
+        return "administration";
     }
     @PostMapping("/registrationTrainers")
     public String addTrainer(@ModelAttribute("userForm") @Valid User userForm, BindingResult bindingResult, Model model) throws Exception {
@@ -85,8 +110,7 @@ public class RegistrationController {
         }
 
         userService.create(userForm);
-        securityService.autoLogin(userForm.getUsername(), userForm.getPasswordConfirm());
-        return "redirect:/";
+        return "administration";
     }
 
     @PostMapping("/registrationAdmin")
@@ -101,8 +125,7 @@ public class RegistrationController {
         }
 
         userService.create(userForm);
-        securityService.autoLogin(userForm.getUsername(), userForm.getPasswordConfirm());
-        return "redirect:/";
+        return "administration";
     }
 
 

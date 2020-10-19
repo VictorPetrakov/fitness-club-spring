@@ -74,4 +74,11 @@ public class Workout {
     public void setWorkoutGroup(WorkoutGroup workoutGroup) {
         this.workoutGroup = workoutGroup;
     }
+
+    @Override
+    public String toString() {
+        return "Workout{"
+                + nameWorkout + '\'' +
+                '}';
+    }
 }
