@@ -11,8 +11,12 @@ import java.util.List;
 @Service
 public class TrainerServiceImpl implements TrainerService {
 
+    private TrainerRepository trainerRepository;
+
     @Autowired
-    TrainerRepository trainerRepository;
+    public TrainerServiceImpl(TrainerRepository trainerRepository) {
+        this.trainerRepository = trainerRepository;
+    }
 
     @Override
     public List<Trainer> findTrainerByKeyword(String keyword) throws Exception {

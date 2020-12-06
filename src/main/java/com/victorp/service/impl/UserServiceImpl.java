@@ -19,20 +19,25 @@ import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
-    @Autowired
-    UserRepository userRepository;
+
+    private UserRepository userRepository;
+
+    private UserRoleRepository userRoleRepository;
+
+    private ClientRepository clientRepository;
+
+    private WorkoutRepository workoutRepository;
+
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    UserRoleRepository userRoleRepository;
-
-    @Autowired
-    ClientRepository clientRepository;
-
-    @Autowired
-    WorkoutRepository workoutRepository;
-
-    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+    public UserServiceImpl(UserRepository userRepository, UserRoleRepository userRoleRepository, ClientRepository clientRepository, WorkoutRepository workoutRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.userRepository = userRepository;
+        this.userRoleRepository = userRoleRepository;
+        this.clientRepository = clientRepository;
+        this.workoutRepository = workoutRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
 
     @Override
     public User getById(Long id) throws Exception {

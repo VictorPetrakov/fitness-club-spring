@@ -10,16 +10,25 @@ import java.util.List;
 
 @Service
 public class WorkoutServiceImpl implements WorkoutService {
+
+    private WorkoutRepository workoutRepository;
+
+    private WorkoutPersonalRepository workoutPersonalRepository;
+
+    private ClientRepository clientRepository;
+
+    private UserRepository userRepository;
+
+    private WorkoutGroupRepository workoutGroupRepository;
+
     @Autowired
-    WorkoutRepository workoutRepository;
-    @Autowired
-    WorkoutPersonalRepository workoutPersonalRepository;
-    @Autowired
-    ClientRepository clientRepository;
-    @Autowired
-    UserRepository userRepository;
-    @Autowired
-    WorkoutGroupRepository workoutGroupRepository;
+    public WorkoutServiceImpl(WorkoutRepository workoutRepository, WorkoutPersonalRepository workoutPersonalRepository, ClientRepository clientRepository, UserRepository userRepository, WorkoutGroupRepository workoutGroupRepository) {
+        this.workoutRepository = workoutRepository;
+        this.workoutPersonalRepository = workoutPersonalRepository;
+        this.clientRepository = clientRepository;
+        this.userRepository = userRepository;
+        this.workoutGroupRepository = workoutGroupRepository;
+    }
 
     @Override
     public void createWorkoutPersonal(WorkoutPersonal workoutPersonal, Workout workout, Client client, User user) throws Exception {

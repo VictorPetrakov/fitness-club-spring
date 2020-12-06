@@ -14,11 +14,15 @@ import java.util.List;
 @Service
 public class ClientServiceImpl implements ClientService {
 
-    @Autowired
-    ClientRepository clientRepository;
-    @Autowired
-    WorkoutService workoutService;
+    private ClientRepository clientRepository;
 
+    private WorkoutService workoutService;
+
+    @Autowired
+    public ClientServiceImpl(ClientRepository clientRepository, WorkoutService workoutService) {
+        this.clientRepository = clientRepository;
+        this.workoutService = workoutService;
+    }
 
 
     @Override

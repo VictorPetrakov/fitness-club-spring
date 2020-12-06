@@ -11,8 +11,12 @@ import java.util.List;
 @Service
 public class AdminServiceImpl implements AdminService {
 
+    private AdminRepository adminRepository;
+
     @Autowired
-    AdminRepository adminRepository;
+    public AdminServiceImpl(AdminRepository adminRepository) {
+        this.adminRepository = adminRepository;
+    }
 
     @Override
     public List<Admin> findAdminByKeyword(String keyword) throws Exception {
