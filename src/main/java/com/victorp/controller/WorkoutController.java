@@ -20,17 +20,21 @@ import java.util.List;
 @Controller
 public class WorkoutController {
 
-    @Autowired
     private ClientService clientService;
 
-    @Autowired
     private UserService userService;
 
-    @Autowired
     private TrainerService trainerService;
 
-    @Autowired
     private WorkoutService workoutService;
+
+    @Autowired
+    public WorkoutController(ClientService clientService, UserService userService, TrainerService trainerService, WorkoutService workoutService) {
+        this.clientService = clientService;
+        this.userService = userService;
+        this.trainerService = trainerService;
+        this.workoutService = workoutService;
+    }
 
 
     @GetMapping("/createWorkoutPersonal")

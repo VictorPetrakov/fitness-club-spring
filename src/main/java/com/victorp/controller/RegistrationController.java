@@ -18,13 +18,19 @@ import javax.validation.Valid;
 
 @Controller
 public class RegistrationController {
-    @Autowired
+
     private UserService userService;
-    @Autowired
+
     private SecurityService securityService;
 
-    @Autowired
     private UserValidator userValidator;
+
+    @Autowired
+    public RegistrationController(UserService userService,SecurityService securityService, UserValidator userValidator) {
+        this.userService = userService;
+        this.securityService = securityService;
+        this.userValidator = userValidator;
+    }
 
     @GetMapping("/login")
     public String login(Model model, String error, String logout) {

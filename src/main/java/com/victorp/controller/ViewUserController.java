@@ -1,15 +1,15 @@
 package com.victorp.controller;
 
 import com.victorp.model.User;
-import com.victorp.service.ClientService;
-import com.victorp.service.TrainerService;
 import com.victorp.service.UserService;
-import com.victorp.service.WorkoutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -17,8 +17,12 @@ import java.util.List;
 @Controller
 public class ViewUserController {
 
-    @Autowired
     private UserService userService;
+
+    @Autowired
+    public ViewUserController(UserService userService) {
+        this.userService = userService;
+    }
 
 
     @GetMapping

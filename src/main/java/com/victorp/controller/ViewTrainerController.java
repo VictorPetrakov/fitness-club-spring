@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ViewTrainerController {
 
-    @Autowired
     private TrainerService trainerService;
+
+    @Autowired
+    public ViewTrainerController(TrainerService trainerService) {
+        this.trainerService = trainerService;
+    }
 
 
     @GetMapping("/trainerView")

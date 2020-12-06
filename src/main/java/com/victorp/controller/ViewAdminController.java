@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ViewAdminController {
 
+    private AdminService adminService;
+
     @Autowired
-    AdminService adminService;
+    public ViewAdminController(AdminService adminService) {
+        this.adminService = adminService;
+    }
 
     @GetMapping("/adminView")
     public String viewTrainer(Model model, String keyword) throws Exception{
